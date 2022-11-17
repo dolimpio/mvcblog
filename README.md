@@ -51,7 +51,7 @@ Create a username for the database. The connection settings in the PHP code are
 in /core/PDOConnection.php
 ```sql
 create user 'mvcuser'@'localhost' identified by 'mvcpass';
-grant all privileges on mvcblog.* to mvcuser@localhost identified by "mvcpass";
+grant all privileges on mvcblog.* to 'mvcuser'@'localhost' WITH GRANT OPTION;
 ```
 
 # Database creation script
