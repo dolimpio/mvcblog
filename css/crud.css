@@ -1,0 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;700&display=swap');
+
+body{
+    
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'Inter';
+    font-style: normal;
+    height: 100vh !important;
+    display: grid;
+    background-color: black;
+
+}
+.grid-item-table table{
+    border-color: black;
+    
+}
+caption{
+    border: 3px solid white;
+    background-color: black;
+    color: white;
+    font-weight: bold;
+}
+tr, th, td{
+    border: 3px solid black;
+    text-align: center;
+    padding: 20px;
+		overflow: hidden;
+    
+}
+td{
+    color: #D04004 ;
+}
+.table-header{
+    background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(208,64,4,1) 45%);
+    color: white;
+    font-weight: bold;
+}
+table {
+    table-layout: fixed;
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+}
+thead th:nth-child(1) {
+    width: 30%;
+}
+  
+thead th:nth-child(2) {
+    width: 20%;
+}
+  
+thead th:nth-child(3) {
+    width: 15%;
+}
+  
+thead th:nth-child(4) {
+    width: 35%;
+}
+
+/* Small devices (tablets, 768px and up) */
+/* container width: 750 */
+@media (min-width: 768px) {
+    body{
+        grid-template-columns: 1fr 4fr 4fr 4fr;
+        grid-template-rows: 1fr 0.1fr 0.1fr 0.1fr 5fr 1fr;
+        width: 100%;
+    }
+    .grid-item-table{
+        grid-column-start: 2;
+        grid-column-end: 5;
+        grid-row: 5;
+    }
+    .grid-item-addExpenses{
+        grid-column: 3;
+        grid-row: 4;
+        margin-left: 60px;
+    }
+  }
+/* Medium devices (desktops, 992px and up) */
+/* container width: 970 */
+@media (min-width: 992px) {
+    body{
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+        grid-template-rows: 0.5fr  0.1fr 0.5fr 2fr 0.1fr 0.2fr 0.1fr;
+        width: 100%;
+    }
+    .grid-item-table{
+        grid-column-start: 3;
+        grid-column-end: 6;
+        grid-row: 4;;
+    }
+    .grid-item-addExpenses{
+        grid-column: 4;
+        grid-row: 6;
+        margin-left: 60px;
+    }
+
+}
+
+/* Large devices (large desktops, 1200px and up) */
+/* container width: 1170px */
+@media (min-width: 1200px) {
+    body{
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+        grid-template-rows: 0.5fr  0.1fr 0.5fr 2fr 0.1fr 0.2fr 0.1fr;
+        width: 100%;
+    }
+    .grid-item-table{
+        grid-column-start: 3;
+        grid-column-end: 6;
+        grid-row: 4;
+        overflow-y: scroll;
+    }
+    .grid-item-addExpenses{
+        grid-column: 4;
+        grid-row: 6;
+        margin-left: 60px;
+    }
+}
