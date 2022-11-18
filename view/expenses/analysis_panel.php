@@ -70,8 +70,9 @@ $errors = $view->getVariable("errors");
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
-    <script src="js/docready.js"></script>
     <script src="js/charts.js"></script>
+    <script src="js/docready.js"></script>
+
 <?php $view->moveToFragment("css");?>
 <link rel="stylesheet" href="css/estilos.css" type="text/css">
 <link rel="stylesheet" href="css/stylechart.css" type="text/css">
