@@ -33,14 +33,14 @@ Promise.all([
       Handlebars.templates.user = Handlebars.compile(source)),
     loadTextFile('templates/components/login.hbs').then((source) =>
       Handlebars.templates.login = Handlebars.compile(source)),
-    loadTextFile('templates/components/posts-table.hbs').then((source) =>
-      Handlebars.templates.poststable = Handlebars.compile(source)),
-    loadTextFile('templates/components/post-edit.hbs').then((source) =>
-      Handlebars.templates.postedit = Handlebars.compile(source)),
-    loadTextFile('templates/components/post-view.hbs').then((source) =>
-      Handlebars.templates.postview = Handlebars.compile(source)),
-    loadTextFile('templates/components/post-row.hbs').then((source) =>
-      Handlebars.templates.postrow = Handlebars.compile(source))
+    loadTextFile('templates/components/expenses-table.hbs').then((source) =>
+      Handlebars.templates.expensestable = Handlebars.compile(source)),
+    loadTextFile('templates/components/expense-edit.hbs').then((source) =>
+      Handlebars.templates.expenseedit = Handlebars.compile(source)),
+    loadTextFile('templates/components/expense-view.hbs').then((source) =>
+      Handlebars.templates.expenseview = Handlebars.compile(source)),
+    loadTextFile('templates/components/expense-row.hbs').then((source) =>
+      Handlebars.templates.expenserow = Handlebars.compile(source))
   ])
   .then(() => {
     $(() => {

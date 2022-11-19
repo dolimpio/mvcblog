@@ -5,31 +5,31 @@ class MainComponent extends Fronty.RouterComponent {
     // models instantiation
     // we can instantiate models at any place
     this.userModel = new UserModel();
-    this.postsModel = new PostsModel();
+    this.expensesModel = new ExpensesModel();
     this.userService = new UserService();
 
     super.setRouterConfig({
       posts: {
-        component: new PostsComponent(this.postsModel, this.userModel, this),
-        title: 'Posts'
+        component: new ExpensesComponent(this.expensesModel, this.userModel, this),
+        title: 'Expenses'
       },
-      'view-post': {
-        component: new PostViewComponent(this.postsModel, this.userModel, this),
-        title: 'Post'
+      'view-expense': {
+        component: new ExpenseViewComponent(this.expensesModel, this.userModel, this),
+        title: 'Expense'
       },
-      'edit-post': {
-        component: new PostEditComponent(this.postsModel, this.userModel, this),
-        title: 'Edit Post'
+      'edit-expense': {
+        component: new ExpenseEditComponent(this.expensesModel, this.userModel, this),
+        title: 'Edit Expense'
       },
-      'add-post': {
-        component: new PostAddComponent(this.postsModel, this.userModel, this),
-        title: 'Add Post'
+      'add-expense': {
+        component: new ExpenseAddComponent(this.expensesModel, this.userModel, this),
+        title: 'Add Expense'
       },
       login: {
         component: new LoginComponent(this.userModel, this),
         title: 'Login'
       },
-      defaultRoute: 'posts'
+      defaultRoute: 'expenses'
     });
 
     Handlebars.registerHelper('currentPage', () => {
