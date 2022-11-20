@@ -188,7 +188,7 @@ class ExpenseRest extends BaseRest {
 
 		if ($expense == NULL) {
 			header($_SERVER['SERVER_PROTOCOL'].' 400 Bad request');
-			echo("Post with id ".$expenseId." not found");
+			echo("Expense with id ".$expenseId." not found");
 			return;
 		}
 		// Check if the Expenses owner is the currentUser (in Session)
@@ -237,9 +237,9 @@ class ExpenseRest extends BaseRest {
 // URI-MAPPING for this Rest endpoint
 $expenseRest = new ExpenseRest();
 URIDispatcher::getInstance()
-->map("GET",	"/expense", array($expenseRest,"getPosts"))
-->map("GET",	"/expense/$1", array($expenseRest,"readPost"))
-->map("POST", "/expense", array($expenseRest,"createPost"))
+->map("GET",	"/expense", array($expenseRest,"getExpenses"))
+->map("GET",	"/expense/$1", array($expenseRest,"readExpense"))
+->map("POST", "/expense", array($expenseRest,"createExpense"))
 // ->map("POST", "/post/$1/comment", array($expenseRest,"createComment"))
-->map("PUT",	"/expense/$1", array($expenseRest,"updatePost"))
-->map("DELETE", "/expense/$1", array($expenseRest,"deletePost"));
+->map("PUT",	"/expense/$1", array($expenseRest,"updateExpense"))
+->map("DELETE", "/expense/$1", array($expenseRest,"deleteExpense"));

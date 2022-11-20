@@ -1,0 +1,26 @@
+<div>
+<h1>{{i18n 'Expenses'}}</h1>
+<div id="expenses-table">
+  {{#if expenses.length}}
+    <table border="1">
+      <thead>
+      <tr>
+        <th>{{i18n 'Type'}}</th>
+        <th>{{i18n 'Date'}}</th>
+        <th>{{i18n 'Quatity'}}</th>
+        <th>{{i18n 'Description'}}</th>
+        <th>{{i18n 'File'}}</th>
+      </tr>
+      </thead>
+      <tbody>
+      {{#each expenses}}
+        <tr fronty-component="ExpenseRowComponent" key="{{id}}" model="expenses[{{@index}}]" id="item-{{id}}"></tr>
+      {{/each}}
+    </tbody>
+    </table>
+  {{/if}}
+</div>
+{{#if user.isLogged}}
+  <a href='#add-expense'>{{i18n 'Add expense'}}</a>
+{{/if}}
+</div>

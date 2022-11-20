@@ -1,9 +1,39 @@
 <div>
-  {{i18n 'Title'}}:<input type="text" id="title" value="{{selectedPost.title}}">
+  {{i18n 'Title'}}:<input type="text" id="title" value="{{selectedExpense.title}}">
   {{#i18n}}{{errors.title}}{{/i18n}}<br> {{i18n 'Content'}}:
   <br>
-  <textarea id="content" rows="20" cols="80">{{selectedPost.content}}</textarea>
-  {{#i18n}}{{errors.content}}{{/i18n}}
+
+  {{!-- Traducir  --}}
+
+  <label for="type">{{i18n 'Types'}}:</label>
+  <select name="types" id="type" value="{{selectedExpense.type}}">
+    <option value="combustible">Combustible</option>
+    <option value="alimentacion">Alimentacion</option>
+    <option value="comunicaciones">Comunicaciones</option>
+    <option value="suministros">Suministros</option>
+    <option value="ocio">Ocio</option>
+  </select>
+  {{#i18n}}{{errors.type}}{{/i18n}}
   <br>
+
+  <label for="date">{{i18n 'Date'}}:</label>
+  <input type="date" id="date" name="date" value="{{selectedExpense.date}}">
+  {{#i18n}}{{errors.date}}{{/i18n}}
+  <br>
+
+  {{i18n 'Quantity'}}:<input type="text" id="quantity" value="{{selectedExpense.quantity}}">
+  {{#i18n}}{{errors.quantity}}{{/i18n}}
+  <br>
+
+  <label for="description">{{i18n 'Description'}}:</label>
+  <textarea id="description" rows="20" cols="80">{{selectedExpense.description}}</textarea>
+  {{#i18n}}{{errors.description}}{{/i18n}}
+  <br>
+
+  <input type="file" id="file" name="filename" value="{{selectedExpense.file}}">
+  <input type="submit">
+  {{#i18n}}{{errors.file}}{{/i18n}}
+
+
   <input type="button" id="savebutton" value="{{i18n 'Save'}}"></input>
 </div>

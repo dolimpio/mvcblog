@@ -1,7 +1,7 @@
 class ExpenseEditComponent extends Fronty.ModelComponent {
   constructor(expensesModel, userModel, router) {
     super(Handlebars.templates.expenseedit, expensesModel);
-    this.expensesModel = expensesModel; // posts
+    this.expensesModel = expensesModel; // expenses
     this.userModel = userModel; // global
     this.addModel('user', userModel);
     this.router = router;
@@ -10,12 +10,12 @@ class ExpenseEditComponent extends Fronty.ModelComponent {
 
     this.addEventListener('click', '#savebutton', () => {
       
-      this.postsModel.selectedExpense.type = $('#type').val();
-      this.postsModel.selectedExpense.date = $('#date').val();
-      this.postsModel.selectedExpense.quantity = $('#quantity').val();
+      this.expensesModel.selectedExpense.type = $('#type').val();
+      this.expensesModel.selectedExpense.date = $('#date').val();
+      this.expensesModel.selectedExpense.quantity = $('#quantity').val();
       //que pasa si estan vacios??? funciona???
-      this.postsModel.selectedExpense.description = $('#description').val();
-      this.postsModel.selectedExpense.file = $('#file').val();
+      this.expensesModel.selectedExpense.description = $('#description').val();
+      this.expensesModel.selectedExpense.file = $('#file').val();
 
       this.expensesService.saveExpense(this.expensesModel.selectedExpense)
         .then(() => {

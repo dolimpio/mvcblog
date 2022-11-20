@@ -28,7 +28,7 @@ class ExpenseModel extends Fronty.Model {
     }
 
     if (owner) {
-      this.expense_date = author_id;
+      this.owner = owner;
     }
   }
 
@@ -44,7 +44,7 @@ class ExpenseModel extends Fronty.Model {
     });
   }
 
-  setQuantity(author_id) {
+  setQuantity(expense_quantity) {
     this.set((self) => {
       self.expense_quantity = expense_quantity;
     });
