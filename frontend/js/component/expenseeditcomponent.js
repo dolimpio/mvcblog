@@ -10,12 +10,12 @@ class ExpenseEditComponent extends Fronty.ModelComponent {
 
     this.addEventListener('click', '#savebutton', () => {
       
-      this.expensesModel.selectedExpense.type = $('#type').val();
-      this.expensesModel.selectedExpense.date = $('#date').val();
-      this.expensesModel.selectedExpense.quantity = $('#quantity').val();
+      this.expensesModel.selectedExpense.expense_type = $('#type').val();
+      this.expensesModel.selectedExpense.expense_date = $('#date').val();
+      this.expensesModel.selectedExpense.expense_quantity = $('#quantity').val();
       //que pasa si estan vacios??? funciona???
-      this.expensesModel.selectedExpense.description = $('#description').val();
-      this.expensesModel.selectedExpense.file = $('#file').val();
+      this.expensesModel.selectedExpense.expense_description = $('#description').val();
+      this.expensesModel.selectedExpense.expense_file = $('#file').val();
 
       this.expensesService.saveExpense(this.expensesModel.selectedExpense)
         .then(() => {

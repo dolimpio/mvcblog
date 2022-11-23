@@ -13,17 +13,17 @@ class ExpenseViewComponent extends Fronty.ModelComponent {
 
     // this.addEventListener('click', '#savecommentbutton', () => {
     //   var selectedId = this.router.getRouteQueryParam('id');
-    //   this.postsService.createComment(selectedId, {
+    //   this.expensesService.createComment(selectedId, {
     //       content: $('#commentcontent').val()
     //     })
     //     .then(() => {
     //       $('#commentcontent').val('');
-    //       this.loadPost(selectedId);
+    //       this.loadExpense(selectedId);
     //     })
     //     .fail((xhr, errorThrown, statusText) => {
     //       if (xhr.status == 400) {
-    //         this.postsModel.set(() => {
-    //           this.postsModel.commentErrors = xhr.responseJSON;
+    //         this.expensesModel.set(() => {
+    //           this.expensesModel.commentErrors = xhr.responseJSON;
     //         });
     //       } else {
     //         alert('an error has occurred during request: ' + statusText + '.' + xhr.responseText);

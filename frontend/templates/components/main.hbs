@@ -1,6 +1,11 @@
 <div>
 <header>
   <h1>Blog</h1>
+    {{#if isLogged}}
+  <h1>{{currentUser}}asdasd</h1>
+    {{/if}}
+
+
   <nav id="menu">
     <ul>
       <li><a href="#expenses">{{i18n 'Expenses'}}</a></li>

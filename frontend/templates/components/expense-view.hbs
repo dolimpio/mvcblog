@@ -1,9 +1,8 @@
 <div>
   {{!-- MOdificar para que encaje con las expenses --}}
   {{!-- Necesitamos ver los gastos de esta forma? como si fuera un post con comentarios??? --}}
-
-  <h2>{{selectedExpense.type}}</h2> {{i18n 'by'}} {{selectedExpense.owner}}
-  <div>{{selectedExpense.content}}</div>
+  <h2>{{selectedExpense.expense_type}}</h2> {{i18n 'by'}} {{selectedExpense.expense_owner}}
+  <div>{{selectedExpense.expense_description}}</div>
   <h1>MIRA EXPENSE-VIEW.HBS, Y DECIDE QUE PONER AQUI</h1>
 
   {{!-- No comments on our app --}}
