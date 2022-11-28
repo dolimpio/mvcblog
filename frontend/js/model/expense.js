@@ -1,6 +1,6 @@
 class ExpenseModel extends Fronty.Model {
 
-  constructor(id, expense_type, expense_date, expense_quantity, expense_description, expense_file, owner) {
+  constructor(id, expense_type, expense_date, expense_quantity, expense_description, expense_file, expense_owner) {
     super('ExpenseModel'); //call super
     
     if (id) {
@@ -27,8 +27,8 @@ class ExpenseModel extends Fronty.Model {
       this.expense_file = expense_file;
     }
 
-    if (owner) {
-      this.owner = owner;
+    if (expense_owner) {
+      this.expense_owner = expense_owner;
     }
   }
 
@@ -62,9 +62,9 @@ class ExpenseModel extends Fronty.Model {
     });
   }
 
-  setOwner(owner) {
+  setOwner(expense_owner) {
     this.set((self) => {
-      self.owner = owner;
+      self.expense_owner = expense_owner;
     });
   }
 }

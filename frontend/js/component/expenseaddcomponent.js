@@ -1,23 +1,23 @@
 class ExpenseAddComponent extends Fronty.ModelComponent {
   constructor(expensesModel, userModel, router) {
-    super(Handlebars.templates.expenseEdit, expensesModel);
+    super(Handlebars.templates.expenseedit, expensesModel);
     this.expensesModel = expensesModel; // expenses
     
     this.userModel = userModel; // global
     this.addModel('user', userModel);
     this.router = router;
 
-    this.expensesService = new ExpensesService();
+    this.ExpensesService = new ExpensesService();
 
     this.addEventListener('click', '#savebutton', () => {
       var newExpense = {};
-      newExpense.type = $('#type').val();
-      newExpense.date = $('#date').val();
-      newExpense.quantity = $('#quantity').val();
+      newExpense.expense_type = $('#type').val();
+      newExpense.expense_date = $('#date').val();
+      newExpense.expense_quantity = $('#quantity').val();
       //que pasa si estan vacios??? funciona???
-      newExpense.description = $('#description').val();
-      newExpense.file = $('#file').val();
-      newExpense.owner = this.userModel.currentUser;
+      newExpense.expense_description = $('#description').val();
+      newExpense.expense_file = $('#file').val();
+      newExpense.expense_owner = this.userModel.currentUser;
 
       this.ExpensesService.addExpense(newExpense)
         .then(() => {

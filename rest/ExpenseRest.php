@@ -55,9 +55,9 @@ class ExpenseRest extends BaseRest {
 	public function createExpense($data) {
 		$currentUser = parent::authenticateUser();
 		$expense = new Expenses();
-
+		print_r("hemos llegado");
 		if (isset($data->expense_type) && isset($data->expense_date)
-		&& isset($data->expense_quantity) && isset($data->owner)) {
+		&& isset($data->expense_quantity) && isset($data->expense_owner)) {
 			
 			$expense->setExpense_type($data->expense_type);
 			$expense->setExpense_date($data->expense_date);
