@@ -43,7 +43,7 @@ class ExpenseRest extends BaseRest {
 				"expense_quantity" => $expense->getExpense_quantity(),
 				"expense_description" => $expense->getExpense_description(),
 				"expense_file" => $expense->getExpense_file(),
-				"owner" => $expense->getOwner()->getUsername()
+				"expense_owner" => $expense->getOwner()->getUsername()
 			));
 		}
 
@@ -96,7 +96,7 @@ class ExpenseRest extends BaseRest {
 				// por ahora queda asi, pero igual deberiamos comprobar que esta seteados??
 				"expense_description" => $expense->getExpense_description(),
 				"expense_file" => $expense->getExpense_file(),
-				"owner" => $expense->getOwner()->getUsername()
+				"expense_owner" => $expense->getOwner()->getUsername()
 			)));
 
 		} catch (ValidationException $e) {
@@ -123,7 +123,7 @@ class ExpenseRest extends BaseRest {
 			// por ahora queda asi, pero igual deberiamos comprobar que esta seteados??
 			"expense_description" => $expense->getExpense_description(),
 			"expense_file" => $expense->getExpense_file(),
-			"owner" => $expense->getOwner()->getUsername()
+			"expense_owner" => $expense->getOwner()->getUsername()
 
 		);
 

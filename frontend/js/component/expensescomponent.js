@@ -21,7 +21,7 @@ class ExpensesComponent extends Fronty.ModelComponent {
       this.expensesModel.setExpenses(
         // create a Fronty.Model for each item retrieved from the backend
         data.map(
-          (item) => new ExpenseModel(item.id, item.expense_type, item.expense_date, item.expense_quantity, item.expense_description, item.expense_file, item.owner)
+          (item) => new ExpenseModel(item.id, item.expense_type, item.expense_date, item.expense_quantity, item.expense_description, item.expense_file, item.expense_owner)
       ));
     });
   }

@@ -12,10 +12,20 @@
         <th>{{i18n 'File'}}</th>
       </tr>
       </thead>
+
       <tbody>
+      {{user.currentUser}}-outside ||
       {{#each expenses}}
-        <tr fronty-component="ExpenseRowComponent" key="{{id}}" model="expenses[{{@index}}]" id="item-{{id}}"></tr>
+      {{../user.currentUser}}-inside ||
+
+      {{expense_owner}}-owner ||
+          {{#if_eq ../user.currentUser expense_owner}}
+
+          <tr fronty-component="ExpenseRowComponent" key="{{id}}" model="expenses[{{@index}}]" id="item-{{id}}"></tr>
+         {{/if_eq}}
+
       {{/each}}
+
     </tbody>
     </table>
   {{/if}}
