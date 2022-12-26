@@ -28,7 +28,6 @@ class ExpensesService {
   }
 
   addExpense(expense) {
-    console.log("estamos fuera??");
     return $.ajax({
       url: AppConfig.backendServer+'/rest/expense',
       method: 'POST',

@@ -14,11 +14,8 @@
       </thead>
 
       <tbody>
-      {{user.currentUser}}-outside ||
       {{#each expenses}}
-      {{../user.currentUser}}-inside ||
 
-      {{expense_owner}}-owner ||
           {{#if_eq ../user.currentUser expense_owner}}
 
           <tr fronty-component="ExpenseRowComponent" key="{{id}}" model="expenses[{{@index}}]" id="item-{{id}}"></tr>

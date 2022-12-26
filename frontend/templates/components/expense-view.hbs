@@ -1,28 +1,13 @@
 <div>
   {{!-- MOdificar para que encaje con las expenses --}}
   {{!-- Necesitamos ver los gastos de esta forma? como si fuera un post con comentarios??? --}}
-  <h2>{{selectedExpense.expense_type}}</h2> {{i18n 'by'}} {{selectedExpense.expense_owner}}
+  <h2>Tipo de expense</h2>
+  <div>{{selectedExpense.expense_type}}</div> {{i18n 'by'}} {{selectedExpense.expense_owner}}
+  <h2>Fecha de expense</h2>
   <div>{{selectedExpense.expense_date}}</div>
+  <h2>Descripcion de expense</h2>
   <div>{{selectedExpense.expense_description}}</div>
-  <h1>MIRA EXPENSE-VIEW.HBS, Y DECIDE QUE PONER AQUI</h1>
+  <h2>Cantidad de expense</h2>
+  <div>{{selectedExpense.expense_quantity}}</div>
 
-  {{!-- No comments on our app --}}
-  {{!-- <div id="comments">
-    <h3>{{i18n 'Comments'}}</h3>
-    {{#each selectedPost.comments}}
-      <p>{{author}} commented</p>
-      <p>
-        {{content}}
-      </p>
-      <hr>
-    {{/each}}
-  </div> --}}
-
-  {{!-- {{#if isLogged}}
-    <h2>{{i18n 'Leave a comment'}}</h2>
-    <div>
-      <textarea rows="4" cols="20" id="commentcontent"></textarea>{{commentErrors.content}}
-    </div>
-    <button id="savecommentbutton">{{i18n 'Save comment'}}</button>
-  {{/if}} --}}
 </div>
