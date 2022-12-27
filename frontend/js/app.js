@@ -40,7 +40,9 @@ Promise.all([
     loadTextFile('templates/components/expense-view.hbs').then((source) =>
       Handlebars.templates.expenseview = Handlebars.compile(source)),
     loadTextFile('templates/components/expense-row.hbs').then((source) =>
-      Handlebars.templates.expenserow = Handlebars.compile(source))
+      Handlebars.templates.expenserow = Handlebars.compile(source)),
+    loadTextFile('templates/components/counter.hbs').then((source) =>
+      Handlebars.templates.counter = Handlebars.compile(source))
   ])
   .then(() => {
     $(() => {

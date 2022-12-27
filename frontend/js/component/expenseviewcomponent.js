@@ -8,28 +8,6 @@ class ExpenseViewComponent extends Fronty.ModelComponent {
     this.router = router;
 
     this.expensesService = new ExpensesService();
-
-    //there isn't comments on our app
-
-    // this.addEventListener('click', '#savecommentbutton', () => {
-    //   var selectedId = this.router.getRouteQueryParam('id');
-    //   this.expensesService.createComment(selectedId, {
-    //       content: $('#commentcontent').val()
-    //     })
-    //     .then(() => {
-    //       $('#commentcontent').val('');
-    //       this.loadExpense(selectedId);
-    //     })
-    //     .fail((xhr, errorThrown, statusText) => {
-    //       if (xhr.status == 400) {
-    //         this.expensesModel.set(() => {
-    //           this.expensesModel.commentErrors = xhr.responseJSON;
-    //         });
-    //       } else {
-    //         alert('an error has occurred during request: ' + statusText + '.' + xhr.responseText);
-    //       }
-    //     });
-    // });
   }
 
   onStart() {

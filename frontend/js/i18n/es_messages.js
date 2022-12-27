@@ -1,6 +1,7 @@
 I18n.translations = {
   'Hello': 'Hola',
   'Expenses':'Gastos',
+  'Charts':'Gráficos',
   'key': 'value',
   'Title': 'Título',
   'Type': 'Tipos',
