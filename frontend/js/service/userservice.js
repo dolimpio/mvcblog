@@ -68,4 +68,32 @@ class UserService {
       contentType: 'application/json'
     });
   }
+
+  deleteUser(user) {
+    console.log("dentro del service " + user)
+    return $.ajax({
+      url: AppConfig.backendServer+'/rest/user/' + user,
+      method: 'DELETE'
+    });
+  }
+
+//Opcion de nuestro amigo
+//  deleteUser(userId) {
+//     fetch(/api/users/${userId}, {
+//       method: 'DELETE',
+//     })
+//       .then(response => {
+//         if (response.ok) {
+//           // Remove the user from the list of users displayed on the page
+//           // Show a message to confirm that the deletion was successful
+//           return;
+//         }
+//         throw new Error('Error deleting user');
+//       })
+//       .catch(error => {
+//         // Handle the error
+//       });
+//   }
+
+
 }

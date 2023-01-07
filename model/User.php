@@ -39,8 +39,9 @@ class User {
 	*/
 	public function __construct($username=NULL, $passwd=NULL, $email=NULL) {
 		$this->username = $username;
-		$this->email = $email;
 		$this->passwd = $passwd;
+		$this->email = $email;
+
 	}
 
 	/**
@@ -110,14 +111,14 @@ class User {
 	*/
 	public function checkIsValidForRegister() {
 		$errors = array();
-		if (strlen($this->username) < 5) {
-			$errors["username"] = "Username must be at least 5 characters length";
+		if (strlen($this->username) < 5 || preg_match('/\s/', $this->username)) {
+			$errors["username"] = "Username must be at least 5 characters length and have no white spaces";
 		}
-		if (strlen($this->email) < 6) { //a@b.cc
-			$errors["username"] = "Username must be at least 6 characters length";
-		}
-		if (strlen($this->passwd) < 5) {
+		if (strlen($this->passwd) < 5 || preg_match('/\s/', $this->passwd)) {
 			$errors["passwd"] = "Password must be at least 5 characters length";
+		}
+		if (strlen($this->email) < 6 || !filter_var($this->email, FILTER_VALIDATE_EMAIL)) { //a@b.cc
+			$errors["email"] = "Email must be at least 6 characters length. And must be email format (a@b.cc).";
 		}
 		if (sizeof($errors)>0){
 			throw new ValidationException($errors, "user is not valid");

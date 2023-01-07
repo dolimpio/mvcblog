@@ -1,7 +1,9 @@
 I18n.translations = {
   'Hello': 'Hola',
   'Expenses':'Gastos',
+  'Delete User': 'Borrar usuario',
   'Charts':'Gráficos',
+  'Email':'Correo Electrónico',
   'key': 'value',
   'Title': 'Título',
   'Type': 'Tipos',

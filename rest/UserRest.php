@@ -22,7 +22,7 @@ class UserRest extends BaseRest {
 	}
 
 	public function postUser($data) {
-		$user = new User($data->username, $data->password);
+		$user = new User($data->username, $data->password, $data->email,);
 		try {
 			$user->checkIsValidForRegister();
 
@@ -47,10 +47,38 @@ class UserRest extends BaseRest {
 			echo("Hello ".$username);
 		}
 	}
+
+	public function deleteUser($user) {
+		
+		$currentUser = parent::authenticateUser();
+
+		$userCheck = $this->userMapper->findByUsername($user);
+
+		if ($userCheck == NULL) {
+			header($_SERVER['SERVER_PROTOCOL'].' 400 Bad request');
+			echo("User with username ".$userCheck." not found");
+			return;
+		}
+
+		// Check if the user is the currentUser (in Session)
+		// if ($userCheck != $currentUser) {
+		// 	header($_SERVER['SERVER_PROTOCOL'].' 403 Forbidden');
+		// 	echo("you are not the current user");
+		// 	return;
+		// }
+
+		$this->userMapper->delete($userCheck);
+
+		header($_SERVER['SERVER_PROTOCOL'].' 204 No Content');
+	}
+
 }
 
 // URI-MAPPING for this Rest endpoint
 $userRest = new UserRest();
 URIDispatcher::getInstance()
 ->map("GET",	"/user/$1", array($userRest,"login"))
-->map("POST", "/user", array($userRest,"postUser"));
+->map("POST", "/user", array($userRest,"postUser"))
+->map("DELETE",	"/user/$1", array($userRest,"deleteUser"));
+
+

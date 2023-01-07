@@ -17,4 +17,14 @@ class UserModel extends Fronty.Model {
       self.isLogged = false;
     });
   }
+
+
+  //COmprobar si hacer algo mas
+  deleteuser() {
+    this.set((self) => {
+      delete self.currentUser;
+      self.isLogged = false;
+    });
+  }
+
 }

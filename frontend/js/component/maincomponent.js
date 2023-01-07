@@ -68,6 +68,14 @@ class MainComponent extends Fronty.RouterComponent {
       this.userService.logout();
     });
 
+    userbar.addEventListener('click', '#deleteuserbutton', () => {
+      console.log("dentro del main "+ this.userModel.currentUser)
+      var userToDelete = this.userModel.currentUser
+      this.userModel.deleteuser();
+      this.userService.deleteUser(userToDelete);
+
+    });
+
     return userbar;
   }
 
