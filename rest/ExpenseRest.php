@@ -165,10 +165,13 @@ class ExpenseRest extends BaseRest {
 		$expense->setOwner($currentUser);
 
 		// if the optional fields are filled, we set them
+		if(isset($data->expense_description)){
+			$expense->setExpense_description($data->expense_description);
+		}
 
-		$expense->setExpense_description($data->expense_description);
-		$expense->setExpense_file($data->expense_file);
-
+		if(isset($data->expense_file)){
+			$expense->setExpense_file($data->expense_file);
+		}
 		try {
 			// validate Expenses object
 			$expense->checkIsValidForUpdate(); // if it fails, ValidationException

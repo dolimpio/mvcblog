@@ -4,6 +4,7 @@ I18n.translations = {
   'Delete User': 'Borrar usuario',
   'Charts':'Gráficos',
   'Email':'Correo Electrónico',
+  'Remembre user?':'Recordar Usuario?',
   'key': 'value',
   'Title': 'Título',
   'Type': 'Tipos',

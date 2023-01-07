@@ -14,8 +14,10 @@ class ExpenseEditComponent extends Fronty.ModelComponent {
       this.expensesModel.selectedExpense.expense_date = $('#date').val();
       this.expensesModel.selectedExpense.expense_quantity = $('#quantity').val();
       //que pasa si estan vacios??? funciona???
-      this.expensesModel.selectedExpense.expense_description = $('#description').val();
+      console.log("este es el file en el edit-component "+ $('#file').val());
       this.expensesModel.selectedExpense.expense_file = $('#file').val();
+
+      this.expensesModel.selectedExpense.expense_description = $('#description').val();
 
       this.expensesService.saveExpense(this.expensesModel.selectedExpense)
         .then(() => {

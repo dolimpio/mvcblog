@@ -19,6 +19,9 @@ class ExpensesService {
   }
 
   saveExpense(expense) {
+    console.log("Esto es un file de un expense en el expense-service " + expense.expense_file);
+    console.log("Esto es un expense STRING en el expense-service " + JSON.stringify(expense));
+
     return $.ajax({
       url: AppConfig.backendServer+'/rest/expense/' + expense.id,
       method: 'PUT',

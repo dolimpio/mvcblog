@@ -6,6 +6,13 @@ class LoginComponent extends Fronty.ModelComponent {
     this.router = router;
 
     this.addEventListener('click', '#loginbutton', (event) => {
+
+      var selected = false;
+      if($('#rememberCheck').is(':checked')){
+        selected = true;
+      }
+      
+      console.log("valor del recuerda usuario " + selected)
       this.userService.login($('#login').val(), $('#password').val())
         .then(() => {
           this.router.goToPage('expenses');
