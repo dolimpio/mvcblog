@@ -7,7 +7,7 @@ class MainComponent extends Fronty.RouterComponent {
     this.userModel = new UserModel();
     this.expensesModel = new ExpensesModel();
     this.userService = new UserService();
-    this.counterModel = new CounterModel();
+    this.counterModel = new Counter();
 
 
     super.setRouterConfig({
@@ -31,8 +31,8 @@ class MainComponent extends Fronty.RouterComponent {
         component: new LoginComponent(this.userModel, this),
         title: 'Login'
       },
-      'charts': {
-        component: new CounterComponent(this.counterModel, this.UserModel, this),
+      charts: {
+        component: new CounterComponent(this.counterModel, this),
         title: 'Charts'
       },
       defaultRoute: 'expenses'

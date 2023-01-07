@@ -1,12 +1,12 @@
-class CounterModel extends Fronty.Model {
+class Counter extends Fronty.Model {
     constructor() {
-        super('CounterModel');
-        this.counter = 10;
+      super('counter');
+      this.counter = 10;
     }
 
     increase() {
-        this.set(() => {
-            this.counter++
-        });
+      this.set(() => {
+        this.counter++
+      });
     }
-}
+  }
