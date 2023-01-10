@@ -8,9 +8,11 @@
 
   <nav id="menu">
     <ul>
+      {{#if isLogged}}
       <li><a href="#charts">{{i18n 'Charts'}}</a></li>
 
       <li><a href="#expenses">{{i18n 'Expenses'}}</a></li>
+      {{/if}}
       <li>
         <div id="userbar">Loading...</div>
       </li>
