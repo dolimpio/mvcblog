@@ -2,17 +2,15 @@
 <header>
   <h1>Blog</h1>
     {{#if isLogged}}
-  <h1>{{user.currentUser}}asdasd</h1>
+  <h1>{{user.currentUser}}</h1>
     {{/if}}
 
 
   <nav id="menu">
     <ul>
-      {{#if isLogged}}
       <li><a href="#charts">{{i18n 'Charts'}}</a></li>
 
       <li><a href="#expenses">{{i18n 'Expenses'}}</a></li>
-      {{/if}}
       <li>
         <div id="userbar">Loading...</div>
       </li>
