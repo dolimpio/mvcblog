@@ -71,10 +71,12 @@ class UserService {
 
   deleteUser(user) {
     console.log("dentro del service " + user)
+    alert("User deleted successfully");
     return $.ajax({
       url: AppConfig.backendServer+'/rest/user/' + user,
       method: 'DELETE'
     });
+    
   }
 
 //Opcion de nuestro amigo

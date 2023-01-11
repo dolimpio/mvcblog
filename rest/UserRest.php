@@ -56,16 +56,16 @@ class UserRest extends BaseRest {
 
 		if ($userCheck == NULL) {
 			header($_SERVER['SERVER_PROTOCOL'].' 400 Bad request');
-			echo("User with username ".$userCheck." not found");
+			echo("User with username ".$user." not found");
 			return;
 		}
 
 		// Check if the user is the currentUser (in Session)
-		// if ($userCheck != $currentUser) {
-		// 	header($_SERVER['SERVER_PROTOCOL'].' 403 Forbidden');
-		// 	echo("you are not the current user");
-		// 	return;
-		// }
+		if ($userCheck->getUsername() != $currentUser->getUsername()) {
+			header($_SERVER['SERVER_PROTOCOL'].' 403 Forbidden');
+			echo("you are not the current user");
+			return;
+		}
 
 		$this->userMapper->delete($userCheck);
 
