@@ -5,6 +5,7 @@ class MainComponent extends Fronty.RouterComponent {
     // models instantiation
     // we can instantiate models at any place
     this.userModel = new UserModel();
+    this.addModel("user", this.userModel);
     this.expensesModel = new ExpensesModel();
     this.userService = new UserService();
     this.counterModel = new Counter();
