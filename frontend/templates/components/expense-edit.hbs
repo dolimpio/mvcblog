@@ -4,6 +4,7 @@
   <br> --}}
 
   {{!-- Traducir  --}}
+  
 
   <label for="type">{{i18n 'Types'}}:</label>
   <select name="types" id="type" value="{{selectedExpense.expense_type}}">
@@ -17,7 +18,8 @@
   <br>
 
   <label for="date">{{i18n 'Date'}}:</label>
-  <input type="date" id="date" name="date" value="{{selectedExpense.expense_date}}">
+
+  <input script="fecha()" type="date" id="date" name="date" value="{{selectedExpense.expense_date}}">
   {{#i18n}}{{errors.expense_date}}{{/i18n}}
   <br>
 
