@@ -22,7 +22,7 @@ class UserRest extends BaseRest {
 	}
 
 	public function postUser($data) {
-		$user = new User($data->username, $data->password, $data->email,);
+		$user = new User($data->username, $data->password, $data->email);
 		try {
 			$user->checkIsValidForRegister();
 
