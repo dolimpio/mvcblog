@@ -37,6 +37,11 @@ class ExpenseEditComponent extends Fronty.ModelComponent {
         });
 
     });
+
+    this.addEventListener('click', '#cancelbutton', () => {
+      
+      this.router.goToPage('expenses');
+    });
   }
 
   onStart() {
