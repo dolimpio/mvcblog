@@ -53,4 +53,5 @@ class ExpenseEditComponent extends Fronty.ModelComponent {
         });
     }
   }
+
 }

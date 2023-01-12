@@ -23,7 +23,7 @@
   {{#i18n}}{{errors.expense_date}}{{/i18n}}
   <br>
 
-  {{i18n 'Quantity'}}:<input type="text" id="quantity" value="{{selectedExpense.expense_quantity}}">
+  {{i18n 'Quantity'}}:<input type="number" id="quantity" min="0" value="{{selectedExpense.expense_quantity}}">
   {{#i18n}}{{errors.expense_quantity}}{{/i18n}}
   <br>
 

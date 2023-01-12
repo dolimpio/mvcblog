@@ -37,10 +37,11 @@ I18n.translations = {
   'Are you sure?': '¿Estás seguro?',
   'remove': 'eliminar',
   'edit': 'editar',
-  'logout': 'Cerrar Sesión',
+  'Logout': 'Cerrar Sesión',
   'Login': 'Iniciar sesión',
   'Username': 'Usuario',
   'The username/password is not valid': 'El nombre de usuario/contraseña no son válidos',
-  'Cancel':'Cancelar'
+  'Cancel':'Cancelar',
+  'Type':'Tipo'
 
 }
