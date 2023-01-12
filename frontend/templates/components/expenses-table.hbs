@@ -2,9 +2,11 @@
 <div>
   {{#if user.isLogged}} 
 <h1>{{i18n 'Expenses'}}</h1>
+
 <div id="expenses-table">
+  <input type="button" id="sortbutton" value="{{i18n 'Sort'}}"></input>
   {{#if expenses.length}}
-    <table border="1">
+    <table id="expensesTable" border="1">
       <thead>
       <tr>
         <th>{{i18n 'Type'}}</th>

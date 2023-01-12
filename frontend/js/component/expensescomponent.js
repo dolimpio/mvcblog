@@ -9,6 +9,13 @@ class ExpensesComponent extends Fronty.ModelComponent {
 
     this.expensesService = new ExpensesService();
 
+    this.addEventListener('click', '#sortbutton', (event) => {
+      if(document.getElementById("expensesTable").id == "expensesTable" ){
+        console.log("a");
+      }
+      this.sortTable();
+    });
+    
   }
 
   onStart() {
@@ -25,6 +32,24 @@ class ExpensesComponent extends Fronty.ModelComponent {
       ));
     });
   }
+
+  sortTable(){
+    console.log("a");
+    let table = document.getElementById("expensesTable");
+    let rows = table.rows;
+    let rowArray = [];
+    for (let i = 1; i < rows.length; i++) {
+        rowArray.push(rows[i]);
+    }
+    rowArray.reverse();
+    for (let i = 0; i < rowArray.length; i++) {
+        table.appendChild(rowArray[i]);
+    }
+}
+
+  
+
+  
 
   // Override
   createChildModelComponent(className, element, id, modelItem) {
