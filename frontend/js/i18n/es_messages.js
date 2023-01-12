@@ -7,7 +7,7 @@ I18n.translations = {
   'Remembre user?':'Recordar Usuario?',
   'key': 'value',
   'Title': 'Título',
-  'Type': 'Tipos',
+  'Types': 'Tipos',
   'Quantity': 'Cantidad',
   'Date':'Fecha',
   'Description': 'Descripción',
@@ -37,9 +37,10 @@ I18n.translations = {
   'Are you sure?': '¿Estás seguro?',
   'remove': 'eliminar',
   'edit': 'editar',
-  'logout': 'cerrar sesión',
+  'logout': 'Cerrar Sesión',
   'Login': 'Iniciar sesión',
   'Username': 'Usuario',
-  'The username/password is not valid': 'El nombre de usuario/contraseña no son válidos'
+  'The username/password is not valid': 'El nombre de usuario/contraseña no son válidos',
+  'Cancel':'Cancelar'
 
 }
