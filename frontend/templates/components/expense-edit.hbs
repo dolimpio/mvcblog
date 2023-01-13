@@ -7,12 +7,12 @@
   
 
   <label for="type">{{i18n 'Types'}}:</label>
-  <select name="types" id="type" value="{{selectedExpense.expense_type}}">
-    <option value="Combustible">Combustible</option>
-    <option value="Alimentacion">Alimentacion</option>
-    <option value="Comunicaciones">Comunicaciones</option>
-    <option value="Suministros">Suministros</option>
-    <option value="Ocio">Ocio</option>
+    <select name="types" id="type" value="{{selectedExpense.expense_type}}">
+    <option value="combustible">Combustible</option>
+    <option value="alimentacion">Alimentacion</option>
+    <option value="comunicaciones">Comunicaciones</option>
+    <option value="suministros">Suministros</option>
+    <option value="ocio">Ocio</option>
   </select>
   {{#i18n}}{{errors.expense_type}}{{/i18n}}
   <br>
@@ -31,8 +31,8 @@
   <textarea id="description" rows="20" cols="80">{{selectedExpense.expense_description}}</textarea>
   {{#i18n}}{{errors.expense_description}}{{/i18n}}
   <br>
-
-  <input type="file" id="file" name="filename" value="{{selectedExpense.expense_file}}">
+  <label for="file">{{i18n 'Archivo'}}:{{selectedExpense.expense_file}}</label>
+  <input type="file" id="file" name="filename" value="">
   {{#i18n}}{{errors.expense_file}}{{/i18n}}
 
   <input type="button" id="savebutton" value="{{i18n 'Save'}}"></input>

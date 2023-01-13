@@ -12,6 +12,7 @@ class LoginComponent extends Fronty.ModelComponent {
         selected = true;
       }
       
+      console.log("valor del recuerda usuario " + selected);
       this.userService.login($('#login').val(), $('#password').val())
         .then(() => {
           this.router.goToPage('expenses');

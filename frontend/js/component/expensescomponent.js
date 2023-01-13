@@ -8,7 +8,9 @@ class ExpensesComponent extends Fronty.ModelComponent {
     this.router = router;
 
     this.expensesService = new ExpensesService();
-
+    this.addEventListener('click', '#downloadCsv', () => {
+      this.downloadCSV(this.expensesInCSV(),"expensesInCSV.csv")
+    }); //se cierra el addEventListener
     this.addEventListener('click', '#sortbuttonbydate', (event) => {
       if(document.getElementById("expensesTable").id == "expensesTable" ){
         console.log(this.flanco);
@@ -37,18 +39,46 @@ class ExpensesComponent extends Fronty.ModelComponent {
   }
 
   onStart() {
-    this.updateExpenses();
+      this.updateExpenses();
   }
+  expensesInCSV(){
+    var expenses = this.expensesModel.expenses;
+  
+    for (var i=0; i < expenses.length; i++) {
+      delete expenses[i].observers;
+      delete expenses[i].name;
+      delete expenses[i].id;
+    }
+      let csvDownload = '';
+      let header = Object.keys(expenses[0]).join(',');
+      let values = expenses.map(o => Object.values(o).join(',')).join('\n');
+      csvDownload += header + '\n' + values;
 
+    return(csvDownload); 
+  }
+  downloadCSV(csv, filename) {
+    var csvFile;
+    var downloadLink;
+    csvFile = new Blob([csv], {type: "text/csv"});
+    downloadLink = document.getElementById("downloadLink");
+    downloadLink.download = filename;
+    downloadLink.href = window.URL.createObjectURL(csvFile);
+    downloadLink.click();
+  } 
   updateExpenses() {
     this.expensesService.findAllExpenses().then((data) => {
-
       this.expensesModel.setExpenses(
         // create a Fronty.Model for each item retrieved from the backend
         data.map(
           (item) => new ExpenseModel(item.id, item.expense_type, item.expense_date, item.expense_quantity, item.expense_description, item.expense_file, item.expense_owner)
       ));
+
     });
+    this.sortExpenses();
+  }
+
+  sortExpenses() {
+      console.log("esto es un expense" + this.expensesModel.expense);
   }
 
   
@@ -133,9 +163,7 @@ sortTableByQuantity() {
     table.appendChild(rowArray[i]);
   }
 }
-
-
-  // Override
+  
   createChildModelComponent(className, element, id, modelItem) {
     return new ExpenseRowComponent(modelItem, this.userModel, this.router, this);
   }
@@ -167,8 +195,11 @@ class ExpenseRowComponent extends Fronty.ModelComponent {
 
     this.addEventListener('click', '.edit-button', (event) => {
       var expenseId = event.target.getAttribute('item');
+      console.log("le has dado al boton de editar al gasto " + expenseId);
       this.router.goToPage('edit-expense?id=' + expenseId);
     });
+
+    
   }
 
 }

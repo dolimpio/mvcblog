@@ -87,20 +87,20 @@ class ExpensesMapper {
 			return NULL;
 		}
 	}
-	 
-	public function findByUsername($username){
+	
+	public function findByUsername($ownerDB){
 		$stmt = $this->db->prepare("SELECT * FROM expenses WHERE ownerDB=?");
-		$stmt->execute(array($username));
-		$expenses = $stmt->fetchAll(PDO::FETCH_ASSOC);
-		$array = array();
+		$stmt->execute(array($ownerDB));
+		$expenses_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$expenses = array();
 
-		foreach ($expenses as $expense) {
+		foreach ($expenses_db as $expense) {
 			$owner = new User($expense["ownerDB"]);
 			array_push($expenses, new Expenses($expense["id"], $expense["typeDB"], $expense["dateDB"], $expense["quantityDB"], $expense["descriptionDB"],$expense["fileDB"],$owner));
 		}
-		return $array;
+		return $expenses;
+		
 	}
-
 	/**
 	* Loads a Expense from the database given its id
 	*
@@ -122,6 +122,13 @@ class ExpensesMapper {
 			$stmt = $this->db->prepare("INSERT INTO expenses(typeDB, dateDB, quantityDB, descriptionDB, fileDB, ownerDB ) values (?,?,?,?,?,?)");
 			//$id=NULL, $expense_type=NULL, $expense_date=NULL, User $expense_quantity=NULL,  $expense_description=NULL, $expense_file=NULL, $owner=NULL
 			$stmt->execute(array($expense->getExpense_type(), $expense->getExpense_date(), $expense->getExpense_quantity(), $expense->getExpense_description(), $expense->getExpense_file(), $expense->getOwner()->getUsername()));
+			return $this->db->lastInsertId();
+		}
+
+		public function saveFile(Expenses $expense) {
+			$stmt = $this->db->prepare("INSERT INTO files(uuid, filename) values (?,?)");
+			$uuid_file = uniqid();
+			$stmt->execute(array($uuid_file, $expense->getExpense_file()));
 			return $this->db->lastInsertId();
 		}
 
