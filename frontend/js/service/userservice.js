@@ -69,6 +69,15 @@ class UserService {
     });
   }
 
+  edit(user) {
+    return $.ajax({
+      url: AppConfig.backendServer+'/rest/user',
+      method: 'POST',
+      data: JSON.stringify(user),
+      contentType: 'application/json'
+    });
+  }
+
   deleteUser(user) {
     console.log("dentro del service " + user)
     alert("User deleted successfully");

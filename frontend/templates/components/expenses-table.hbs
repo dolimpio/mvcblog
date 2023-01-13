@@ -4,7 +4,9 @@
 <h1>{{i18n 'Expenses'}}</h1>
 
 <div id="expenses-table">
-  <input type="button" id="sortbutton" value="{{i18n 'Sort'}}"></input>
+  <input type="button" id="sortbuttonbydate" value="{{i18n 'Sort by date'}}"></input>
+  <input type="button" id="sortbuttonbytype" value="{{i18n 'Sort by type'}}"></input>
+  <input type="button" id="sortbuttonbyquantity" value="{{i18n 'Sort by quantity'}}"></input>
   {{#if expenses.length}}
     <table id="expensesTable" border="1">
       <thead>

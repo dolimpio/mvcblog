@@ -42,6 +42,11 @@ I18n.translations = {
   'Username': 'Usuario',
   'The username/password is not valid': 'El nombre de usuario/contraseña no son válidos',
   'Cancel':'Cancelar',
-  'Type':'Tipo'
+  'Type':'Tipo',
+  'Edit User':'Editar Usuario',
+  'Sort by date':'Ordenar por fecha',
+  'Sort by type':'Ordenar por tipo',
+  'Sort by quantity':'Ordenar por cantidad',
+  'Return':'Atrás'
 
 }

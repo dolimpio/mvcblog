@@ -9,12 +9,30 @@ class ExpensesComponent extends Fronty.ModelComponent {
 
     this.expensesService = new ExpensesService();
 
-    this.addEventListener('click', '#sortbutton', (event) => {
+    this.addEventListener('click', '#sortbuttonbydate', (event) => {
       if(document.getElementById("expensesTable").id == "expensesTable" ){
-        console.log("a");
+        console.log(this.flanco);
       }
-      this.sortTable();
+      this.sortTableByDate();
     });
+
+    this.addEventListener('click', '#sortbuttonbytype', (event) => {
+      if(document.getElementById("expensesTable").id == "expensesTable" ){
+        console.log(this.flanco);
+      }
+      this.sortTableByType();
+    });
+
+    this.addEventListener('click', '#sortbuttonbyquantity', (event) => {
+      if(document.getElementById("expensesTable").id == "expensesTable" ){
+        console.log(this.flanco);
+      }
+      this.sortTableByQuantity();
+    });
+
+    this.flancodate = true;
+    this.flancotype = true;
+    this.flancoquantity = true;
     
   }
 
@@ -33,23 +51,88 @@ class ExpensesComponent extends Fronty.ModelComponent {
     });
   }
 
-  sortTable(){
-    console.log("a");
+  
+  sortTableByDate(){
     let table = document.getElementById("expensesTable");
     let rows = table.rows;
     let rowArray = [];
     for (let i = 1; i < rows.length; i++) {
         rowArray.push(rows[i]);
     }
-    rowArray.reverse();
+    if(this.flancodate){
+      rowArray.sort(function(a, b) {
+        let dateA = new Date(a.cells[1].innerHTML);
+        let dateB = new Date(b.cells[1].innerHTML);
+        return dateA - dateB;
+      });
+      this.flancodate=!this.flancodate;
+    }else{
+      rowArray.sort(function(a, b) {
+        let dateA = new Date(a.cells[1].innerHTML);
+        let dateB = new Date(b.cells[1].innerHTML);
+        return dateB - dateA;
+      })
+      this.flancodate=!this.flancodate;
+    }
     for (let i = 0; i < rowArray.length; i++) {
         table.appendChild(rowArray[i]);
     }
 }
 
+sortTableByType(){
+  var table = document.getElementById("expensesTable");
+  var rows = table.rows;
+  var rowArray = [];
   
+  for (let i = 1; i < rows.length; i++) {
+      rowArray.push(rows[i]);
+  }
+  if(this.flancotype){
+    rowArray.sort(function(a, b) {
+      let typeA = a.getElementsByTagName("TD")[0].getElementsByTagName("a")[0].innerHTML.toLowerCase();
+      let typeB = b.getElementsByTagName("TD")[0].getElementsByTagName("a")[0].innerHTML.toLowerCase();
+      return typeA > typeB ? 1 : -1;
+    });
+    this.flancotype = !this.flancotype;
+  }else{
+    rowArray.sort(function(a, b) {
+      let typeA = a.getElementsByTagName("TD")[0].getElementsByTagName("a")[0].innerHTML.toLowerCase();
+      let typeB = b.getElementsByTagName("TD")[0].getElementsByTagName("a")[0].innerHTML.toLowerCase();
+      return typeA < typeB ? 1 : -1;
+    });
+    this.flancotype = !this.flancotype;
+  }
+  for (let i = 0; i < rowArray.length; i++) {
+      table.appendChild(rowArray[i]);
+  }
+}
 
-  
+sortTableByQuantity(){
+  let table = document.getElementById("expensesTable");
+  let rows = table.rows;
+  let rowArray = [];
+  for (let i = 1; i < rows.length; i++) {
+      rowArray.push(rows[i]);
+  }
+  if(this.flancotype){
+    rowArray.sort(function(a, b) {
+      let dateA = new Date(a.cells[2].innerHTML);
+      let dateB = new Date(b.cells[2].innerHTML);
+      return dateA - dateB;
+    });
+    this.flancotype=!this.flancotype;
+  }else{
+    rowArray.sort(function(a, b) {
+      let dateA = new Date(a.cells[2].innerHTML);
+      let dateB = new Date(b.cells[2].innerHTML);
+      return dateB - dateA;
+    })
+    this.flancotype=!this.flancotype;
+  }
+  for (let i = 0; i < rowArray.length; i++) {
+      table.appendChild(rowArray[i]);
+  }
+}
 
   // Override
   createChildModelComponent(className, element, id, modelItem) {
