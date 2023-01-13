@@ -87,6 +87,7 @@ class ExpensesMapper {
 			return NULL;
 		}
 	}
+	
 	public function findByUsername($ownerDB){
 		$stmt = $this->db->prepare("SELECT * FROM expenses WHERE ownerDB=?");
 		$stmt->execute(array($ownerDB));

@@ -27,6 +27,32 @@ class ExpenseRest extends BaseRest {
 		$this->expensesMapper = new ExpensesMapper();
 	}
 
+	public function readExpense($expenseId) {
+		// find the Expense object in the database
+		$expense = $this->expensesMapper->findById($expenseId);
+		if ($expense == NULL) {
+			header($_SERVER['SERVER_PROTOCOL'].' 400 Bad request');
+			echo("Expense with id ".$expenseId." not found");
+			return;
+		}
+
+		$expense_array = array(
+			"id" => $expense->getId(),
+			"expense_type" => $expense->getExpense_type(),
+			"expense_date" => $expense->getExpense_date(),
+			"expense_quantity" => $expense->getExpense_quantity(),
+			// por ahora queda asi, pero igual deberiamos comprobar que esta seteados??
+			"expense_description" => $expense->getExpense_description(),
+			"expense_file" => $expense->getExpense_file(),
+			"expense_owner" => $expense->getOwner()->getUsername()
+		);
+	
+		
+		header($_SERVER['SERVER_PROTOCOL'].' 200 Ok');
+		header('Content-Type: application/json');
+		echo(json_encode($expense_array));
+	}
+
 	public function getExpenses() {
 		$currentUser = parent::authenticateUser();
 		$username = $currentUser->getUsername();
@@ -180,27 +206,7 @@ class ExpenseRest extends BaseRest {
 	
 		echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
 	}
-	public function readExpense($expenseId) {
-		// find the Expense object in the database
-		$expense = $this->expensesMapper->findById($expenseId);
-		if ($expense == NULL) {
-			header($_SERVER['SERVER_PROTOCOL'].' 400 Bad request');
-			echo("Expense with id ".$expenseId." not found");
-			return;
-		}
 
-		$expense_array = array(
-			"id" => $expense->getId(),
-			"expense_type" => $expense->getExpense_type(),
-			"expense_date" => $expense->getExpense_date(),
-			"expense_quantity" => $expense->getExpense_quantity(),
-			// por ahora queda asi, pero igual deberiamos comprobar que esta seteados??
-			"expense_description" => $expense->getExpense_description(),
-			"expense_file" => $expense->getExpense_file(),
-			"expense_owner" => $expense->getOwner()->getUsername()
-
-		);
-	}
 }
 
 // URI-MAPPING for this Rest endpoint

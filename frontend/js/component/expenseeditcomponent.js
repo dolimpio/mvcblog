@@ -50,7 +50,7 @@ class ExpenseEditComponent extends Fronty.ModelComponent {
     if (selectedId != null) {
       this.expensesService.findExpense(selectedId)
         .then((expense) => {
-          console.log("el expense que ha llegado es del tipo = " + expense.expense_type);
+          console.log("el expense que ha llegado es del tipo = " + expense.toString());
           console.log("el expense que ha llegado tiene el archivo = " + expense.expense_file);
           this.expensesModel.setSelectedExpense(expense);
         });
