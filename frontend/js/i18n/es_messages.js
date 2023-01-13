@@ -1,4 +1,5 @@
 I18n.translations = {
+  'Download in CSV' : 'Descargar en CSV',
   'Hello': 'Hola',
   'File':'Archivo',
   'Expenses':'Gastos',

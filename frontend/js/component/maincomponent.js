@@ -8,6 +8,7 @@ class MainComponent extends Fronty.RouterComponent {
     this.addModel("user", this.userModel);
     this.expensesModel = new ExpensesModel();
     this.userService = new UserService();
+    this.expensesService = new ExpensesService();
     this.counterModel = new Counter();
 
     super.setRouterConfig({
@@ -75,7 +76,7 @@ class MainComponent extends Fronty.RouterComponent {
     });
 
     userbar.addEventListener('click', '#deleteuserbutton', () => {
-      console.log("dentro del main "+ this.userModel.currentUser)
+      console.log("dentro del main "+ this.userModel.currentUser);
       var userToDelete = this.userModel.currentUser
       this.userModel.deleteuser();
       this.userService.deleteUser(userToDelete);
@@ -85,7 +86,7 @@ class MainComponent extends Fronty.RouterComponent {
     userbar.addEventListener('click', '#edituserbutton', () => {
       this.goToPage('edit-user');
     });
-
+    
     return userbar;
   }
 

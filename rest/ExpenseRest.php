@@ -28,7 +28,9 @@ class ExpenseRest extends BaseRest {
 	}
 
 	public function getExpenses() {
-		$expenses = $this->expensesMapper->findAll();
+		$currentUser = parent::authenticateUser();
+		$username = $currentUser->getUsername();
+		$expenses = $this->expensesMapper->findByUsername($username);
 
 		// json_encode Expenses objects.
 		// since Expenses objects have private fields, the PHP json_encode will not
@@ -107,43 +109,6 @@ class ExpenseRest extends BaseRest {
 		}
 	}
 
-	public function readExpense($expenseId) {
-		// find the Expense object in the database
-		$expense = $this->expensesMapper->findById($expenseId);
-		if ($expense == NULL) {
-			header($_SERVER['SERVER_PROTOCOL'].' 400 Bad request');
-			echo("Expense with id ".$expenseId." not found");
-			return;
-		}
-
-		$expense_array = array(
-			"id" => $expense->getId(),
-			"expense_type" => $expense->getExpense_type(),
-			"expense_date" => $expense->getExpense_date(),
-			"expense_quantity" => $expense->getExpense_quantity(),
-			// por ahora queda asi, pero igual deberiamos comprobar que esta seteados??
-			"expense_description" => $expense->getExpense_description(),
-			"expense_file" => $expense->getExpense_file(),
-			"expense_owner" => $expense->getOwner()->getUsername()
-
-		);
-
-		//No tenemos comentarios
-		//add comments
-		// $post_array["comments"] = array();
-		// foreach ($post->getComments() as $comment) {
-		// 	array_push($post_array["comments"], array(
-		// 		"id" => $comment->getId(),
-		// 		"content" => $comment->getContent(),
-		// 		"author" => $comment->getAuthor()->getusername()
-		// 	));
-		//}
-
-		header($_SERVER['SERVER_PROTOCOL'].' 200 Ok');
-		header('Content-Type: application/json');
-		echo(json_encode($expense_array));
-	}
-
 	public function updateExpense($expenseId, $data) {
 		$currentUser = parent::authenticateUser();
 
@@ -208,35 +173,34 @@ class ExpenseRest extends BaseRest {
 		header($_SERVER['SERVER_PROTOCOL'].' 204 No Content');
 	}
 
-	//There's no comments
-	// public function createComment($postId, $data) {
-	// 	$currentUser = parent::authenticateUser();
+	public function debug_to_console($data) {
+		$output = $data;
+		if (is_array($output))
+			$output = implode(',', $output);
+	
+		echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
+	}
+	public function readExpense($expenseId) {
+		// find the Expense object in the database
+		$expense = $this->expensesMapper->findById($expenseId);
+		if ($expense == NULL) {
+			header($_SERVER['SERVER_PROTOCOL'].' 400 Bad request');
+			echo("Expense with id ".$expenseId." not found");
+			return;
+		}
 
-	// 	$post = $this->postMapper->findById($postId);
-	// 	if ($post == NULL) {
-	// 		header($_SERVER['SERVER_PROTOCOL'].' 400 Bad request');
-	// 		echo("Post with id ".$postId." not found");
-	// 		return;
-	// 	}
+		$expense_array = array(
+			"id" => $expense->getId(),
+			"expense_type" => $expense->getExpense_type(),
+			"expense_date" => $expense->getExpense_date(),
+			"expense_quantity" => $expense->getExpense_quantity(),
+			// por ahora queda asi, pero igual deberiamos comprobar que esta seteados??
+			"expense_description" => $expense->getExpense_description(),
+			"expense_file" => $expense->getExpense_file(),
+			"expense_owner" => $expense->getOwner()->getUsername()
 
-	// 	$comment = new Comment();
-	// 	$comment->setContent($data->content);
-	// 	$comment->setAuthor($currentUser);
-	// 	$comment->setPost($post);
-
-	// 	try {
-	// 		$comment->checkIsValidForCreate(); // if it fails, ValidationException
-
-	// 		$this->commentMapper->save($comment);
-
-	// 		header($_SERVER['SERVER_PROTOCOL'].' 201 Created');
-
-	// 	}catch(ValidationException $e) {
-	// 		header($_SERVER['SERVER_PROTOCOL'].' 400 Bad request');
-	// 		header('Content-Type: application/json');
-	// 		echo(json_encode($e->getErrors()));
-	// 	}
-	// }
+		);
+	}
 }
 
 // URI-MAPPING for this Rest endpoint
@@ -245,6 +209,6 @@ URIDispatcher::getInstance()
 ->map("GET",	"/expense", array($expenseRest,"getExpenses"))
 ->map("GET",	"/expense/$1", array($expenseRest,"readExpense"))
 ->map("POST", "/expense", array($expenseRest,"createExpense"))
-// ->map("POST", "/post/$1/comment", array($expenseRest,"createComment"))
 ->map("PUT",	"/expense/$1", array($expenseRest,"updateExpense"))
 ->map("DELETE", "/expense/$1", array($expenseRest,"deleteExpense"));
+

@@ -3,6 +3,9 @@ class ExpensesService {
 
   }
 
+  downloadCsv(){
+    return $.get(AppConfig.backendServer+'/rest/expense/csv');
+  }
   findAllExpenses() {
     return $.get(AppConfig.backendServer+'/rest/expense');
   }
@@ -40,15 +43,7 @@ class ExpensesService {
     });
 
   }
-
-  // We dont have comments
-  // createComment(postid, comment) {
-  //   return $.ajax({
-  //     url: AppConfig.backendServer+'/rest/post/' + postid + '/comment',
-  //     method: 'POST',
-  //     data: JSON.stringify(comment),
-  //     contentType: 'application/json'
-  //   });
-  // }
+  
+  
 
 }

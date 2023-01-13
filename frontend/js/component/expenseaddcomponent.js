@@ -14,7 +14,6 @@ class ExpenseAddComponent extends Fronty.ModelComponent {
       newExpense.expense_type = $('#type').val();
       newExpense.expense_date = $('#date').val();
       newExpense.expense_quantity = $('#quantity').val();
-      //que pasa si estan vacios??? funciona???
       newExpense.expense_description = $('#description').val();
       newExpense.expense_file = $('#file').val();
       newExpense.expense_owner = this.userModel.currentUser;
