@@ -76,35 +76,7 @@ class MainComponent extends Fronty.RouterComponent {
       this.userService.deleteUser(userToDelete);
 
     });
-
-    userbar.addEventListener('click', '#downloadCsv', () => {
-      console.log("sE HA ESCUCHACHO E CLICK DE DESCRAGAR EN EL COMPONENT");
-      var userForDownload = this.userModel.currentUser;
-      var expenses = this.expensesModel.expenses;
-
-      for (var i=0; i < expenses.length; i++) {
-        delete expenses[i].observers;
-        delete expenses[i].name;
-        delete expenses[i].id;
-      }
-      let csvDownload = '';
-      let header = Object.keys(expenses[0]).join(',');
-      let values = expenses.map(o => Object.values(o).join(',')).join('\n');
-      csvDownload += header + '\n' + values;
-      console.log(csvDownload);
-      downloadCSV(csvDownload,"expensesInCSV.csv")
-      });
-
-      function downloadCSV(csv, filename) {
-        var csvFile;
-        var downloadLink;
-        csvFile = new Blob([csv], {type: "text/csv"});
-        downloadLink = document.getElementById("downloadLink");
-        downloadLink.download = filename;
-        downloadLink.href = window.URL.createObjectURL(csvFile);
-        document.body.appendChild(downloadLink);
-        downloadLink.click();
-    }
+    
     return userbar;
   }
 

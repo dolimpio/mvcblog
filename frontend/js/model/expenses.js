@@ -1,9 +1,7 @@
 class ExpensesModel extends Fronty.Model {
 
   constructor() {
-    super('ExpensesModel'); //call super
-
-    // model attributes
+    super('ExpensesModel'); 
     this.expenses = [];
   }
 

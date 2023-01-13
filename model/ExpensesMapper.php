@@ -87,20 +87,19 @@ class ExpensesMapper {
 			return NULL;
 		}
 	}
-	 
-	public function findByUsername($username){
+	public function findByUsername($ownerDB){
 		$stmt = $this->db->prepare("SELECT * FROM expenses WHERE ownerDB=?");
-		$stmt->execute(array($username));
-		$expenses = $stmt->fetchAll(PDO::FETCH_ASSOC);
-		$array = array();
+		$stmt->execute(array($ownerDB));
+		$expenses_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$expenses = array();
 
-		foreach ($expenses as $expense) {
+		foreach ($expenses_db as $expense) {
 			$owner = new User($expense["ownerDB"]);
 			array_push($expenses, new Expenses($expense["id"], $expense["typeDB"], $expense["dateDB"], $expense["quantityDB"], $expense["descriptionDB"],$expense["fileDB"],$owner));
 		}
-		return $array;
+		return $expenses;
+		
 	}
-
 	/**
 	* Loads a Expense from the database given its id
 	*

@@ -28,7 +28,9 @@ class ExpenseRest extends BaseRest {
 	}
 
 	public function getExpenses() {
-		$expenses = $this->expensesMapper->findAll();
+		$currentUser = parent::authenticateUser();
+		$username = $currentUser->getUsername();
+		$expenses = $this->expensesMapper->findByUsername($username);
 
 		// json_encode Expenses objects.
 		// since Expenses objects have private fields, the PHP json_encode will not
@@ -175,31 +177,15 @@ class ExpenseRest extends BaseRest {
 	
 		echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
 	}
-
-	public function downloadCsv() {
-		$currentUser = parent::authenticateUser()->getUsername();
-        $expenses = $this->expensesMapper->findByUsername($currentUser);
-
-        $expenses_array = array();
-        foreach($expenses as $expense) {
-            array_push($expenses_array, array(
-                "id" => $expense->getId(),
-                "expense_type" => $expense->getExpense_type(),
-                "expense_date" => $expense->getExpense_date(),
-                "expense_quantity" => $expense->getExpense_quantity(),
-                "expense_description" => $expense->getExpense_description(),
-                "expense_file" => $expense->getExpense_file(),
-                "expense_owner" => $expense->getOwner()->getUsername()
-            ));
+	public function readExpense($expenseId) {
+        // find the Expense object in the database
+        $expense = $this->expensesMapper->findById($expenseId);
+        if ($expense == NULL) {
+            header($_SERVER['SERVER_PROTOCOL'].' 400 Bad request');
+            echo("Expense with id ".$expenseId." not found");
+            return;
         }
-    
-        header($_SERVER['SERVER_PROTOCOL'].' 200 Ok');
-        header('Content-Type: application/json');
-        echo(json_encode($expenses_array));
-
-    }
-
-
+	}
 	
 }
 
@@ -207,7 +193,6 @@ class ExpenseRest extends BaseRest {
 $expenseRest = new ExpenseRest();
 URIDispatcher::getInstance()
 ->map("GET",	"/expense", array($expenseRest,"getExpenses"))
-->map("GET",	"/expense/csv", array($expenseRest,"downloadCsv"))
 ->map("GET",	"/expense/$1", array($expenseRest,"readExpense"))
 ->map("POST", "/expense", array($expenseRest,"createExpense"))
 ->map("PUT",	"/expense/$1", array($expenseRest,"updateExpense"))
