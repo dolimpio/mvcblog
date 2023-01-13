@@ -5,10 +5,10 @@ class MainComponent extends Fronty.RouterComponent {
     // models instantiation
     // we can instantiate models at any place
     this.userModel = new UserModel();
+    this.addModel("user", this.userModel);
     this.expensesModel = new ExpensesModel();
     this.userService = new UserService();
     this.counterModel = new Counter();
-
 
     super.setRouterConfig({
       expenses: {
@@ -26,6 +26,10 @@ class MainComponent extends Fronty.RouterComponent {
       'add-expense': {
         component: new ExpenseAddComponent(this.expensesModel, this.userModel, this),
         title: 'Add Expense'
+      },
+      'edit-user': {
+        component: new UserEditComponent(this.userModel, this),
+        title: 'Edit User'
       },
       login: {
         component: new LoginComponent(this.userModel, this),
@@ -76,6 +80,10 @@ class MainComponent extends Fronty.RouterComponent {
       this.userModel.deleteuser();
       this.userService.deleteUser(userToDelete);
 
+    });
+
+    userbar.addEventListener('click', '#edituserbutton', () => {
+      this.goToPage('edit-user');
     });
 
     return userbar;

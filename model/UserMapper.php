@@ -35,6 +35,15 @@ class UserMapper {
 		$stmt->execute(array($user->getUsername(), $user->getPasswd(), $user->getEmail(), $date));
 	}
 
+	public function editUser($user, $oldname) {
+
+		// Actualizar las referencias a ese usuario en la tabla "expenses" para apuntar a la nueva fila
+		
+		$stmt = $this->db->prepare("UPDATE users SET username=?, passwd=?, email=? where username=?");
+		$stmt->execute(array($user->getUsername(),$user->getPasswd(),$user->getEmail(), $oldname));
+
+	}
+
 	/**
 	* Checks if a given username is already in the database
 	*

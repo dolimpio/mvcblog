@@ -69,12 +69,23 @@ class UserService {
     });
   }
 
+  editUser(user) {
+    return $.ajax({
+      url: AppConfig.backendServer+'/rest/user',
+      method: 'PUT',
+      data: JSON.stringify(user),
+      contentType: 'application/json'
+    });
+  }
+
   deleteUser(user) {
     console.log("dentro del service " + user)
+    alert("User deleted successfully");
     return $.ajax({
       url: AppConfig.backendServer+'/rest/user/' + user,
       method: 'DELETE'
     });
+    
   }
 
 //Opcion de nuestro amigo

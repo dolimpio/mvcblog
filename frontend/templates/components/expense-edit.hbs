@@ -4,24 +4,26 @@
   <br> --}}
 
   {{!-- Traducir  --}}
+  
 
   <label for="type">{{i18n 'Types'}}:</label>
   <select name="types" id="type" value="{{selectedExpense.expense_type}}">
-    <option value="combustible">Combustible</option>
-    <option value="alimentacion">Alimentacion</option>
-    <option value="comunicaciones">Comunicaciones</option>
-    <option value="suministros">Suministros</option>
-    <option value="ocio">Ocio</option>
+    <option value="Combustible">Combustible</option>
+    <option value="Alimentacion">Alimentacion</option>
+    <option value="Comunicaciones">Comunicaciones</option>
+    <option value="Suministros">Suministros</option>
+    <option value="Ocio">Ocio</option>
   </select>
   {{#i18n}}{{errors.expense_type}}{{/i18n}}
   <br>
 
   <label for="date">{{i18n 'Date'}}:</label>
+
   <input type="date" id="date" name="date" value="{{selectedExpense.expense_date}}">
   {{#i18n}}{{errors.expense_date}}{{/i18n}}
   <br>
 
-  {{i18n 'Quantity'}}:<input type="text" id="quantity" value="{{selectedExpense.expense_quantity}}">
+  {{i18n 'Quantity'}}:<input type="number" id="quantity" min="0" value="{{selectedExpense.expense_quantity}}">
   {{#i18n}}{{errors.expense_quantity}}{{/i18n}}
   <br>
 
@@ -34,4 +36,5 @@
   {{#i18n}}{{errors.expense_file}}{{/i18n}}
 
   <input type="button" id="savebutton" value="{{i18n 'Save'}}"></input>
+  <input type="button" id="cancelbutton" value="{{i18n 'Cancel'}}"></input>
 </div>

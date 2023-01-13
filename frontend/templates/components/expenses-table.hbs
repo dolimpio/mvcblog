@@ -1,13 +1,19 @@
+
 <div>
+  {{#if user.isLogged}} 
 <h1>{{i18n 'Expenses'}}</h1>
+
 <div id="expenses-table">
+  <input type="button" id="sortbuttonbydate" value="{{i18n 'Sort by date'}}"></input>
+  <input type="button" id="sortbuttonbytype" value="{{i18n 'Sort by type'}}"></input>
+  <input type="button" id="sortbuttonbyquantity" value="{{i18n 'Sort by quantity'}}"></input>
   {{#if expenses.length}}
-    <table border="1">
+    <table id="expensesTable" border="1">
       <thead>
       <tr>
         <th>{{i18n 'Type'}}</th>
         <th>{{i18n 'Date'}}</th>
-        <th>{{i18n 'Quatity'}}</th>
+        <th>{{i18n 'Quantity'}}</th>
         <th>{{i18n 'Description'}}</th>
         <th>{{i18n 'File'}}</th>
       </tr>
@@ -26,8 +32,9 @@
     </tbody>
     </table>
   {{/if}}
+  
 </div>
-{{#if user.isLogged}}
+
   <a href='#add-expense'>{{i18n 'Add expense'}}</a>
 {{/if}}
 </div>

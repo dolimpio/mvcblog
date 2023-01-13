@@ -215,8 +215,8 @@ class expenses {
 			$errors["expense_type"] = "type is mandatory";
 		}
 			//combustible, alimentacion, comunicaciones, suministros, ocio
-		if ($this->expense_type != "combustible" && $this->expense_type != "alimentacion" && $this->expense_type != "comunicaciones" &&
-		$this->expense_type != "suministros" && $this->expense_type != "ocio" && $this->expense_type != NULL) {
+		if ($this->expense_type != "Combustible" && $this->expense_type != "Alimentacion" && $this->expense_type != "Comunicaciones" &&
+		$this->expense_type != "Suministros" && $this->expense_type != "Ocio" && $this->expense_type != NULL) {
 			$errors["expense_type"] = "type must be combustible, alimentacion, comunicaciones, suministros or ocio";
 		}
 		if ($this->expense_date == NULL ) {
@@ -224,6 +224,9 @@ class expenses {
 		}
 		if (strlen(trim($this->expense_quantity)) == 0 ) {
 			$errors["expense_quantity"] = "quantity is mandatory";
+		}
+		if ($this->expense_quantity <= 0 ) {
+			$errors["expense_quantity"] = "quantity is mandatory and cannot be a negative number";
 		}
 		if ($this->owner == NULL ) {
 			$errors["expense_owner"] = "owner is mandatory";

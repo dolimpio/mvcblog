@@ -8,7 +8,7 @@ I18n.translations = {
   'Remembre user?':'Recordar Usuario?',
   'key': 'value',
   'Title': 'Título',
-  'Type': 'Tipos',
+  'Types': 'Tipos',
   'Quantity': 'Cantidad',
   'Date':'Fecha',
   'Description': 'Descripción',
@@ -36,11 +36,18 @@ I18n.translations = {
   'Create user': 'Registrarse',
   'Username must be at least 5 characters length': 'El usuario debe contener al menos 5 letras',
   'Are you sure?': '¿Estás seguro?',
-  'remove': 'eliminar',
-  'edit': 'editar',
-  'logout': 'cerrar sesión',
+  'Remove': 'Eliminar',
+  'Edit': 'Editar',
+  'Logout': 'Cerrar Sesión',
   'Login': 'Iniciar sesión',
   'Username': 'Usuario',
-  'The username/password is not valid': 'El nombre de usuario/contraseña no son válidos'
+  'The username/password is not valid': 'El nombre de usuario/contraseña no son válidos',
+  'Cancel':'Cancelar',
+  'Type':'Tipo',
+  'Edit User':'Editar Usuario',
+  'Sort by date':'Ordenar por fecha',
+  'Sort by type':'Ordenar por tipo',
+  'Sort by quantity':'Ordenar por cantidad',
+  'Return':'Atrás'
 
 }
