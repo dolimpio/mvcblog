@@ -30,7 +30,7 @@ class ExpensesComponent extends Fronty.ModelComponent {
       this.sortTableByQuantity();
     });
 
-    this.flancodate = true;
+    this.flancodate = false;
     this.flancotype = true;
     this.flancoquantity = true;
     

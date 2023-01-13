@@ -10,13 +10,13 @@ class UserEditComponent extends Fronty.ModelComponent {
 
     this.addEventListener('click', '#savebutton', () => {
       
-      this.userService.register({
+      this.userService.editUser({
         username: $('#editusername').val(),
         password: $('#editpassword').val(),
         email: $('#editemailname').val()
       })
       .then(() => {
-        this.router.goToPage('expenses');
+        this.userService.logout();
         alert(I18n.translate('User modified! Please login'));
         this.userModel.set((model) => {
           model.registerErrors = {};
@@ -42,6 +42,7 @@ class UserEditComponent extends Fronty.ModelComponent {
   }
 
   onStart() {
+    console.log(this.userModel.currenUser);
   }
 
 }

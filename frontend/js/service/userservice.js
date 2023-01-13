@@ -69,10 +69,10 @@ class UserService {
     });
   }
 
-  edit(user) {
+  editUser(user) {
     return $.ajax({
       url: AppConfig.backendServer+'/rest/user',
-      method: 'POST',
+      method: 'PUT',
       data: JSON.stringify(user),
       contentType: 'application/json'
     });

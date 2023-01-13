@@ -22,11 +22,33 @@ class UserRest extends BaseRest {
 	}
 
 	public function postUser($data) {
-		$user = new User($data->username, $data->password, $data->email,);
+		$user = new User($data->username, $data->password, $data->email);
 		try {
 			$user->checkIsValidForRegister();
 
 			$this->userMapper->save($user);
+
+			header($_SERVER['SERVER_PROTOCOL'].' 201 Created');
+			header("Location: ".$_SERVER['REQUEST_URI']."/".$data->username);
+		}catch(ValidationException $e) {
+			http_response_code(400);
+			header('Content-Type: application/json');
+			echo(json_encode($e->getErrors()));
+		}
+	}
+
+	public function editUser($data) {
+
+		$currentLogged = parent::authenticateUser();
+		$username = $currentLogged->getUsername();
+
+		$user = new User($data->username, $data->password, $data->email);
+
+
+		try {
+			$user->checkIsValidForRegister();
+
+			$this->userMapper->editUser($user,$username);
 
 			header($_SERVER['SERVER_PROTOCOL'].' 201 Created');
 			header("Location: ".$_SERVER['REQUEST_URI']."/".$data->username);
@@ -79,6 +101,7 @@ $userRest = new UserRest();
 URIDispatcher::getInstance()
 ->map("GET",	"/user/$1", array($userRest,"login"))
 ->map("POST", "/user", array($userRest,"postUser"))
+->map("PUT", "/user", array($userRest,"editUser"))
 ->map("DELETE",	"/user/$1", array($userRest,"deleteUser"));
 
 
