@@ -12,18 +12,23 @@ class ExpensesComponent extends Fronty.ModelComponent {
   }
 
   onStart() {
-    this.updateExpenses();
+      this.updateExpenses();
   }
 
   updateExpenses() {
     this.expensesService.findAllExpenses().then((data) => {
-
       this.expensesModel.setExpenses(
         // create a Fronty.Model for each item retrieved from the backend
         data.map(
           (item) => new ExpenseModel(item.id, item.expense_type, item.expense_date, item.expense_quantity, item.expense_description, item.expense_file, item.expense_owner)
       ));
+
     });
+    this.sortExpenses();
+  }
+
+  sortExpenses() {
+      console.log("esto es un expense" + this.expensesModel.expense);
   }
 
   // Override
@@ -58,6 +63,7 @@ class ExpenseRowComponent extends Fronty.ModelComponent {
 
     this.addEventListener('click', '.edit-button', (event) => {
       var expenseId = event.target.getAttribute('item');
+      console.log("le has dado al boton de editar al gasto " + expenseId);
       this.router.goToPage('edit-expense?id=' + expenseId);
     });
   }

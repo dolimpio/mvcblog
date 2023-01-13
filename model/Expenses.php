@@ -45,6 +45,7 @@ class expenses {
 	* @var string
 	*/
 	private $expense_file;
+
 	/**
 	* The author of this expense
 	* @var User

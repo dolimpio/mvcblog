@@ -1,5 +1,6 @@
 I18n.translations = {
   'Hello': 'Hola',
+  'File':'Archivo',
   'Expenses':'Gastos',
   'Delete User': 'Borrar usuario',
   'Charts':'Gráficos',

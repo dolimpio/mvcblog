@@ -29,8 +29,8 @@
   <textarea id="description" rows="20" cols="80">{{selectedExpense.expense_description}}</textarea>
   {{#i18n}}{{errors.expense_description}}{{/i18n}}
   <br>
-
-  <input type="file" id="file" name="filename" value="{{selectedExpense.expense_file}}">
+  <label for="file">{{i18n 'Archivo'}}:{{selectedExpense.expense_file}}</label>
+  <input type="file" id="file" name="filename" value="">
   {{#i18n}}{{errors.expense_file}}{{/i18n}}
 
   <input type="button" id="savebutton" value="{{i18n 'Save'}}"></input>

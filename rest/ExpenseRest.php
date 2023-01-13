@@ -70,7 +70,9 @@ class ExpenseRest extends BaseRest {
 			}
 
 			if(isset($data->expense_file)){
+				$uuid_file = uniqid();
 				$expense->setExpense_file($data->expense_file);
+
 			}
 
 		}
@@ -81,7 +83,7 @@ class ExpenseRest extends BaseRest {
 
 			// save the Expenses object into the database
 			$expenseId = $this->expensesMapper->save($expense);
-
+			$this->expensesMapper->saveFile($expense);
 			// response OK. Also send expense in content
 			header($_SERVER['SERVER_PROTOCOL'].' 201 Created');
 			header('Location: '.$_SERVER['REQUEST_URI']."/".$expenseId);
@@ -172,6 +174,7 @@ class ExpenseRest extends BaseRest {
 		if(isset($data->expense_file)){
 			$expense->setExpense_file($data->expense_file);
 		}
+
 		try {
 			// validate Expenses object
 			$expense->checkIsValidForUpdate(); // if it fails, ValidationException

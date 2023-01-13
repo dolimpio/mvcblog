@@ -66,6 +66,8 @@ class MainComponent extends Fronty.RouterComponent {
     userbar.addEventListener('click', '#logoutbutton', () => {
       this.userModel.logout();
       this.userService.logout();
+      this.goToPage('login');
+      
     });
 
     userbar.addEventListener('click', '#deleteuserbutton', () => {

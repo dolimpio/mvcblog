@@ -125,6 +125,13 @@ class ExpensesMapper {
 			return $this->db->lastInsertId();
 		}
 
+		public function saveFile(Expenses $expense) {
+			$stmt = $this->db->prepare("INSERT INTO files(uuid, filename) values (?,?)");
+			$uuid_file = uniqid();
+			$stmt->execute(array($uuid_file, $expense->getExpense_file()));
+			return $this->db->lastInsertId();
+		}
+
 		/**
 		* Updates a expense in the database
 		*
