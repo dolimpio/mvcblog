@@ -36,15 +36,10 @@ class UserMapper {
 
 	public function editUser($user, $oldname) {
 
-		$stmt = $this->db->prepare("INSERT INTO users values (?,?,?)");
-		$stmt->execute(array($user->getUsername(), $user->getPasswd(), $user->getEmail()));
-
 		// Actualizar las referencias a ese usuario en la tabla "expenses" para apuntar a la nueva fila
-		$stmt = $this->db->prepare("UPDATE expenses SET ownerDB = ? WHERE ownerDB = ?");
-		$stmt->execute(array($user->getUsername(), $oldname));
-
-		$stmt = $this->db->prepare("DELETE from users WHERE username=?");
-		$stmt->execute(array($oldname));
+		
+		$stmt = $this->db->prepare("UPDATE users SET username=?, passwd=?, email=? where username=?");
+		$stmt->execute(array($user->getUsername(),$user->getPasswd(),$user->getEmail(), $oldname));
 
 	}
 
