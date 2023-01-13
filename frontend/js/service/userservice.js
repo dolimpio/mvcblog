@@ -76,7 +76,7 @@ class UserService {
       method: 'DELETE'
     });
   }
-
+  
 //Opcion de nuestro amigo
 //  deleteUser(userId) {
 //     fetch(/api/users/${userId}, {

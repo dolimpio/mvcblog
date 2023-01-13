@@ -3,7 +3,8 @@
     {{i18n 'Hello'}} {{currentUser}}
     <input type="button" id='logoutbutton' value="{{i18n 'logout'}}"></input>
     <input type="button" id='deleteuserbutton' value="{{i18n 'Delete User'}}"></input>
-
+    <input type="submit" id='downloadCsv' value="{{i18n 'Download in CSV'}}"></input>
+    <a type="href" id='downloadLink'></a>
   {{else}}
     <a href='#login'>{{i18n 'Login'}}</a>
   {{/if}}
