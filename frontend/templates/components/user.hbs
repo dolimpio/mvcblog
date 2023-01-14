@@ -2,9 +2,9 @@
   {{#if isLogged}}
 
     {{i18n 'Hello'}} {{currentUser}}
-    <input type="button" id='logoutbutton' value="{{i18n 'Logout'}}"></input>
-    <input type="button" id='deleteuserbutton' value="{{i18n 'Delete User'}}"></input>
-    <input type="button" id='edituserbutton' value="{{i18n 'Edit User'}}"></input>
+    <button type="button" id='logoutbutton' ><span>{{i18n 'Logout'}}</span></button>
+    <button type="button" id='deleteuserbutton'><span>{{i18n 'Delete User'}}</span></button>
+    <button type="button" id='edituserbutton' ><span>{{i18n 'Edit User'}}</span></button>
 
   {{else}}
     <a href='#login'>{{i18n 'Login'}}</a>

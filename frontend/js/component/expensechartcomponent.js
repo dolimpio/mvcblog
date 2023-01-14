@@ -112,7 +112,7 @@ class CounterComponent extends Fronty.ModelComponent {
         },
         plotOptions: {
             pie: {
-                size:'100%',
+                size:'90%',
                 allowPointSelect: true,
                 cursor: 'pointer',
                 dataLabels: {
@@ -125,7 +125,7 @@ class CounterComponent extends Fronty.ModelComponent {
             enabled: false
           },
           exporting: { enabled: false },
-        colors: ['#EB906A', '#D04004', '#DFBBB1', '#983207', '#EF5E0A', '#7E5746'],
+        colors: ['#EB906A', '#D04004', '#DFBBB1', '#983207', '#EF5E0A', '#7E5746', '#FF0000'],
 
         series: [{
             name: '',

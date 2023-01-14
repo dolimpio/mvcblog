@@ -3,8 +3,17 @@ html{
   border: 0;
   margin: 0;
   height: 100vh;
-  background-color: bisque;
+  background-color: #ffe4c4;
 }
+body{
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+#frontyapp{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 
 #menu {
   
@@ -41,13 +50,29 @@ html{
   font-size: 14px;
   cursor: pointer;
 }
-
-#maincontent {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+#optionsDiv{
+  display: flex;
+  flex-direction: row;
 }
+#logindiv{
+  align-items: center;
+  border-style:solid;
+  border-radius: 2px;
+  border-radius: 8px;
+  padding: 30px;
+  width: 50%; /* or any other value */
+  height: 50%;
+}
+#maincontent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 100px;
+  width: 50%; /* or any other value */
+  height: 50%; /* or any other value */
+}
+
+
 footer {
   position: fixed;
   bottom: 0;
@@ -74,17 +99,69 @@ footer {
   margin-left: 10px;
   color:white;
 }
+#logoutbutton, #deleteuserbutton, #edituserbutton{
+  background-color: #f8c07b !important;
+  border: none;
+  color:#333 !important;
+  padding: 9px 24px ;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 13px !important;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 8px;
+  box-shadow: 0 4px #999;
+}
+#logoutbutton:hover, #deleteuserbutton:hover, #edituserbutton:hover{
+  background-color: #333 !important;
+  color: white!important;
+  box-shadow: 0 4px #666;
+}
+button {
+  background-color: #333; /* Green */
+  border: none;
+  color: white;
+  padding: 10px 26px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 8px;
+  box-shadow: 0 4px #999;
+}
+
+button:hover {
+  background-color: #f8c07b;
+  box-shadow: 0 4px #666;
+}
+
 table {
   border-collapse: collapse; 
-  background-color: white;
-  width: 100%;
-  overflow-x: auto;
+  background-color: #ffffff;
+}
+#expenses-table{
+  max-height: 400px !important; 
+  overflow-y: scroll !important;
+  scrollbar-color: #000000 #F5F5F5; /* Change the thumb and track color of the scrollbar */
+  scrollbar-width: thin; /* Change the width of the scrollbar (thin, medium, thick) */
+  
+}
+#expenses-table::-webkit-scrollbar {
+  width: 12px; /* Change the width of the scrollbar */
+  background-color: #F5F5F5; /* Change the background color of the scrollbar */
+}
+#expenses-table::-webkit-scrollbar-thumb {
+  background-color: #000000; /* Change the thumb color of the scrollbar */
+  border-radius: 10px; /* Change the border-radius of the thumb */
 }
 
 th, td {
   border: 1px solid #ddd; 
   padding: 8px; 
-  font-size: 18px;
+  font-size: 15px;
   font-weight: bold;
 }
 th {
@@ -108,4 +185,18 @@ tr:hover td {
 }
 #menuOptions{
   margin: 100px;
+}
+#container{
+  width: 500px;
+  height: 400px;
+}
+#container2{
+  width: 700px;
+  height: 400px;
+}
+#graficas{
+  width: 1200px;
+  height: 500px;
+  display: flex;
+  flex-direction: row;
 }

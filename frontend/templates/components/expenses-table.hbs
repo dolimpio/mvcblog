@@ -1,42 +1,45 @@
 
 <div>
   {{#if user.isLogged}} 
-<h1>{{i18n 'Expenses'}}</h1>
+  <h1>{{i18n 'Expenses'}}</h1>
 
-<div id="expenses-table">
-  <input type="button" id="sortbuttonbydate" value="{{i18n 'Sort by date'}}"></input>
-  <input type="button" id="sortbuttonbytype" value="{{i18n 'Sort by type'}}"></input>
-  <input type="button" id="sortbuttonbyquantity" value="{{i18n 'Sort by quantity'}}"></input>
-  {{#if expenses.length}}
-    <table id="expensesTable" border="1">
-      <thead>
-      <tr>
-        <th>{{i18n 'Type'}}</th>
-        <th>{{i18n 'Date'}}</th>
-        <th>{{i18n 'Quantity'}}</th>
-        <th>{{i18n 'Description'}}</th>
-        <th>{{i18n 'File'}}</th>
-      </tr>
-      </thead>
+  <div id="expenses-table">
+    <button type="button" id="sortbuttonbydate"><span>{{i18n 'Sort by date'}}</span></button>
+    <button type="button" id="sortbuttonbytype"><span>{{i18n 'Sort by type'}}</span></button>
+    <button type="button" id="sortbuttonbyquantity"><span>{{i18n 'Sort by quantity'}}</span></button>
+    {{#if expenses.length}}
+      <table id="expensesTable" border="1">
+        <thead>
+        <tr>
+          <th>{{i18n 'Type'}}</th>
+          <th>{{i18n 'Date'}}</th>
+          <th>{{i18n 'Quantity'}}</th>
+          <th>{{i18n 'Description'}}</th>
+          <th>{{i18n 'File'}}</th>
+        </tr>
+        </thead>
 
-      <tbody>
-      {{#each expenses}}
+        <tbody>
+        {{#each expenses}}
 
-          {{#if_eq ../user.currentUser expense_owner}}
+            {{#if_eq ../user.currentUser expense_owner}}
 
-          <tr fronty-component="ExpenseRowComponent" key="{{id}}" model="expenses[{{@index}}]" id="item-{{id}}"></tr>
-         {{/if_eq}}
+            <tr fronty-component="ExpenseRowComponent" key="{{id}}" model="expenses[{{@index}}]" id="item-{{id}}"></tr>
+          {{/if_eq}}
 
-      {{/each}}
+        {{/each}}
 
-    </tbody>
-    </table>
+      </tbody>
+      </table>
+    {{/if}}
+    
+  </div>
+  <div id="optionsDiv">
+    {{#if user.isLogged}}
+      <button id="tableOptions"><a href='#add-expense'>{{i18n 'Add expense'}}</a></button>
+      <button id="tableOptions" type="submit" id='downloadCsv' ><span>{{i18n 'Download in CSV'}}</span></button>
+      <a type="href" id='downloadLink'></a>
+    {{/if}}
+  </div>  
   {{/if}}
-  
-</div>
-{{#if user.isLogged}}
-  <button id="tableOptions"><a href='#add-expense'>{{i18n 'Add expense'}}</a></button>
-  <input id="tableOptions" type="submit" id='downloadCsv' value="{{i18n 'Download in CSV'}}"></input>
-  <a type="href" id='downloadLink'></a>
-{{/if}}
 </div>

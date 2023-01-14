@@ -10,7 +10,7 @@ class ExpensesComponent extends Fronty.ModelComponent {
     this.expensesService = new ExpensesService();
     this.addEventListener('click', '#downloadCsv', () => {
       this.downloadCSV(this.expensesInCSV(),"expensesInCSV.csv")
-    }); //se cierra el addEventListener
+    }); 
     this.addEventListener('click', '#sortbuttonbydate', (event) => {
       if(document.getElementById("expensesTable").id == "expensesTable" ){
         console.log(this.flanco);
@@ -68,7 +68,6 @@ class ExpensesComponent extends Fronty.ModelComponent {
   updateExpenses() {
     this.expensesService.findAllExpenses().then((data) => {
       this.expensesModel.setExpenses(
-        // create a Fronty.Model for each item retrieved from the backend
         data.map(
           (item) => new ExpenseModel(item.id, item.expense_type, item.expense_date, item.expense_quantity, item.expense_description, item.expense_file, item.expense_owner)
       ));
@@ -176,7 +175,7 @@ class ExpenseRowComponent extends Fronty.ModelComponent {
     this.expensesComponent = expensesComponent;
     
     this.userModel = userModel;
-    this.addModel('user', userModel); // a secondary model
+    this.addModel('user', userModel);
     
     this.router = router;
 
