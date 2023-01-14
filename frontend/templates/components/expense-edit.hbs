@@ -4,6 +4,7 @@
   <br> --}}
 
   {{!-- Traducir  --}}
+  
 
   <label for="type">{{i18n 'Types'}}:</label>
     <select name="types" id="type" value="{{selectedExpense.expense_type}}">
@@ -17,11 +18,12 @@
   <br>
 
   <label for="date">{{i18n 'Date'}}:</label>
+
   <input type="date" id="date" name="date" value="{{selectedExpense.expense_date}}">
   {{#i18n}}{{errors.expense_date}}{{/i18n}}
   <br>
 
-  {{i18n 'Quantity'}}:<input type="text" id="quantity" value="{{selectedExpense.expense_quantity}}">
+  {{i18n 'Quantity'}}:<input type="number" id="quantity" min="0" value="{{selectedExpense.expense_quantity}}">
   {{#i18n}}{{errors.expense_quantity}}{{/i18n}}
   <br>
 
@@ -29,9 +31,10 @@
   <textarea id="description" rows="20" cols="80">{{selectedExpense.expense_description}}</textarea>
   {{#i18n}}{{errors.expense_description}}{{/i18n}}
   <br>
-
-  <input type="file" id="file" name="filename" value="{{selectedExpense.expense_file}}">
+  <label for="file">{{i18n 'Archivo'}}:{{selectedExpense.expense_file}}</label>
+  <input type="file" id="file" name="filename" value="">
   {{#i18n}}{{errors.expense_file}}{{/i18n}}
 
   <input type="button" id="savebutton" value="{{i18n 'Save'}}"></input>
+  <input type="button" id="cancelbutton" value="{{i18n 'Cancel'}}"></input>
 </div>

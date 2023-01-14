@@ -87,6 +87,7 @@ class ExpensesMapper {
 			return NULL;
 		}
 	}
+	
 	public function findByUsername($ownerDB){
 		$stmt = $this->db->prepare("SELECT * FROM expenses WHERE ownerDB=?");
 		$stmt->execute(array($ownerDB));
@@ -121,6 +122,13 @@ class ExpensesMapper {
 			$stmt = $this->db->prepare("INSERT INTO expenses(typeDB, dateDB, quantityDB, descriptionDB, fileDB, ownerDB ) values (?,?,?,?,?,?)");
 			//$id=NULL, $expense_type=NULL, $expense_date=NULL, User $expense_quantity=NULL,  $expense_description=NULL, $expense_file=NULL, $owner=NULL
 			$stmt->execute(array($expense->getExpense_type(), $expense->getExpense_date(), $expense->getExpense_quantity(), $expense->getExpense_description(), $expense->getExpense_file(), $expense->getOwner()->getUsername()));
+			return $this->db->lastInsertId();
+		}
+
+		public function saveFile(Expenses $expense) {
+			$stmt = $this->db->prepare("INSERT INTO files(uuid, filename) values (?,?)");
+			$uuid_file = uniqid();
+			$stmt->execute(array($uuid_file, $expense->getExpense_file()));
 			return $this->db->lastInsertId();
 		}
 

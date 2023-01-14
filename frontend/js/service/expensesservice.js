@@ -3,9 +3,6 @@ class ExpensesService {
 
   }
 
-  downloadCsv(){
-    return $.get(AppConfig.backendServer+'/rest/expense/csv');
-  }
   findAllExpenses() {
     return $.get(AppConfig.backendServer+'/rest/expense');
   }
@@ -34,6 +31,7 @@ class ExpensesService {
   }
 
   addExpense(expense) {
+    
     return $.ajax({
       url: AppConfig.backendServer+'/rest/expense',
       method: 'POST',

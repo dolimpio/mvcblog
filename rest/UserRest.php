@@ -37,6 +37,28 @@ class UserRest extends BaseRest {
 		}
 	}
 
+	public function editUser($data) {
+
+		$currentLogged = parent::authenticateUser();
+		$username = $currentLogged->getUsername();
+
+		$user = new User($data->username, $data->password, $data->email);
+
+
+		try {
+			$user->checkIsValidForRegister();
+
+			$this->userMapper->editUser($user,$username);
+
+			header($_SERVER['SERVER_PROTOCOL'].' 201 Created');
+			header("Location: ".$_SERVER['REQUEST_URI']."/".$data->username);
+		}catch(ValidationException $e) {
+			http_response_code(400);
+			header('Content-Type: application/json');
+			echo(json_encode($e->getErrors()));
+		}
+	}
+
 	public function login($username) {
 		$currentLogged = parent::authenticateUser();
 		if ($currentLogged->getUsername() != $username) {
@@ -56,16 +78,16 @@ class UserRest extends BaseRest {
 
 		if ($userCheck == NULL) {
 			header($_SERVER['SERVER_PROTOCOL'].' 400 Bad request');
-			echo("User with username ".$userCheck." not found");
+			echo("User with username ".$user." not found");
 			return;
 		}
 
 		// Check if the user is the currentUser (in Session)
-		// if ($userCheck != $currentUser) {
-		// 	header($_SERVER['SERVER_PROTOCOL'].' 403 Forbidden');
-		// 	echo("you are not the current user");
-		// 	return;
-		// }
+		if ($userCheck->getUsername() != $currentUser->getUsername()) {
+			header($_SERVER['SERVER_PROTOCOL'].' 403 Forbidden');
+			echo("you are not the current user");
+			return;
+		}
 
 		$this->userMapper->delete($userCheck);
 
@@ -79,6 +101,7 @@ $userRest = new UserRest();
 URIDispatcher::getInstance()
 ->map("GET",	"/user/$1", array($userRest,"login"))
 ->map("POST", "/user", array($userRest,"postUser"))
+->map("PUT", "/user", array($userRest,"editUser"))
 ->map("DELETE",	"/user/$1", array($userRest,"deleteUser"));
 
 

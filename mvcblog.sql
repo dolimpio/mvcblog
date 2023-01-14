@@ -46,6 +46,12 @@ CREATE TABLE `expenses` (
   `ownerDB` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+DROP TABLE IF EXISTS `files`;
+CREATE TABLE `files` (
+  `uuid` int(11) NOT NULL,
+  `filename` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 --
 -- Volcado de datos para la tabla `expenses`
 --

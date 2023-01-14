@@ -45,6 +45,7 @@ class expenses {
 	* @var string
 	*/
 	private $expense_file;
+
 	/**
 	* The author of this expense
 	* @var User
@@ -223,6 +224,9 @@ class expenses {
 		}
 		if (strlen(trim($this->expense_quantity)) == 0 ) {
 			$errors["expense_quantity"] = "quantity is mandatory";
+		}
+		if ($this->expense_quantity <= 0 ) {
+			$errors["expense_quantity"] = "quantity is mandatory and cannot be a negative number";
 		}
 		if ($this->owner == NULL ) {
 			$errors["expense_owner"] = "owner is mandatory";

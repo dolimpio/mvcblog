@@ -16,7 +16,7 @@ $errors = $view->getVariable("errors");
             <form action="index.php?controller=users&amp;action=login" class="loginForm" name="loginForm" id="loginForm" method="POST">
                 <input type="text" id="txtUsuario" name="username" placeholder=<?= i18n("User")?>>
                 <input type="password" id="txtPassword" name="passwd" placeholder=<?= i18n("Password")?>>
-							<input type="checkbox" value="rememberMe"name="rememberCheck"><?= i18n("Remember me?")?>
+				<input type="checkbox" value="rememberMe"name="rememberCheck"><?= i18n("Remember me?")?>
                 <input type="submit" class=boton value="Acceder">
             </form>
 
