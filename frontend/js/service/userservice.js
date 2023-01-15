@@ -52,19 +52,16 @@ class UserService {
 }
 
   deleteCookie(name) {
-    setCookie(name, "", -1);
+    this.setCookie(name, "", -1);
 }
 
   loginWithCookies() {
     var self = this;
     return new Promise((resolve, reject) => {
-      if (this.checkCookie('user') &&
-      this.checkCookie('pass')) {
-        console.log(this.getCookie("user")+ ", "+this.getCookie("pass"));
-        console.log("lo intento");
-        self.login(this.getCookie('login'), this.getCookie('pass'))
+      if (this.checkCookie('user') && this.checkCookie('pass')) {
+        self.login(this.getCookie("user"), this.getCookie("pass"))
           .then(() => {
-            resolve(this.getCookie('user'));
+            resolve(this.getCookie("user"));
           })
           .catch(() => {
             reject();
@@ -76,7 +73,6 @@ class UserService {
   }
 
   login(login, pass) {
-    console.log("Entró en el login");
     return new Promise((resolve, reject) => {
       $.get({
           url: AppConfig.backendServer+'/rest/user/' + login,
@@ -86,16 +82,14 @@ class UserService {
         })
         .then(() => {
           //keep this authentication forever
-          console.log("Entró en el then del login");
           window.sessionStorage.setItem('login', login);
           window.sessionStorage.setItem('pass', pass);
 
           if(this.getCookie("user")==null&&this.getCookie("pass")==null){
-            console.log("Entró en el if de las cookies");
           this.setCookie("user",login,30);
           this.setCookie("pass",pass,30);
         }
-        console.log("Va a loguear");
+        
           $.ajaxSetup({
             beforeSend: (xhr) => {
               xhr.setRequestHeader("Authorization", "Basic " + btoa(login + ":" + pass));
@@ -117,6 +111,8 @@ class UserService {
   logout() {
     window.sessionStorage.removeItem('login');
     window.sessionStorage.removeItem('pass');
+    this.deleteCookie("user");
+    this.deleteCookie("pass");
     $.ajaxSetup({
       beforeSend: (xhr) => {}
     });
@@ -141,7 +137,6 @@ class UserService {
   }
 
   deleteUser(user) {
-    console.log("dentro del service " + user)
     alert("User deleted successfully");
     return $.ajax({
       url: AppConfig.backendServer+'/rest/user/' + user,
