@@ -7,6 +7,17 @@ class ExpensesService {
     return $.get(AppConfig.backendServer+'/rest/expense');
   }
 
+  getPieChart(dates) {
+    console.log("en el pieservice se manda " + dates);
+    return $.get(AppConfig.backendServer+'/rest/expense/piechart/' + dates);
+  }
+
+  getLineChart(dates) {
+    console.log("en el lineservice se manda " + dates);
+
+    return $.get(AppConfig.backendServer+'/rest/expense/linechart/' + dates);
+  }
+
   findExpense(id) {
     return $.get(AppConfig.backendServer+'/rest/expense/' + id);
   }

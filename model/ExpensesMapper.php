@@ -60,6 +60,8 @@ class ExpensesMapper {
 		return $expenses;
 	}
 
+	
+
 	/**
 	* Loads a expense from the database given its id
 	*
@@ -87,7 +89,33 @@ class ExpensesMapper {
 			return NULL;
 		}
 	}
-	
+
+	public function findByUsernameDate($ownerDB, $start_date, $end_date){
+		$fromDate = $start_date;
+		$toDate = $end_date;
+
+		$dateCompare = new DateTime($start_date);
+		$yearCompare = (int) $dateCompare->format('Y');
+
+		if($yearCompare == 1920){
+			$stmt = $this->db->prepare("SELECT * FROM expenses WHERE ownerDB=?");
+			$stmt->execute(array($ownerDB));
+			$expenses_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+			$expenses = array();
+		}else{
+			$stmt = $this->db->prepare("SELECT * FROM expenses WHERE ownerDB=? AND dateDB BETWEEN ? AND ? GROUP BY dateDB");
+			$stmt->execute(array($ownerDB,$fromDate,$toDate));
+			$expenses_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+			$expenses = array();
+		}
+
+		foreach ($expenses_db as $expense) {
+			$owner = new User($expense["ownerDB"]);
+			array_push($expenses, new Expenses($expense["id"], $expense["typeDB"], $expense["dateDB"], $expense["quantityDB"], $expense["descriptionDB"],$expense["fileDB"],$owner));
+		}
+		return $expenses;
+	}
+
 	public function findByUsername($ownerDB){
 		$stmt = $this->db->prepare("SELECT * FROM expenses WHERE ownerDB=?");
 		$stmt->execute(array($ownerDB));
@@ -99,7 +127,6 @@ class ExpensesMapper {
 			array_push($expenses, new Expenses($expense["id"], $expense["typeDB"], $expense["dateDB"], $expense["quantityDB"], $expense["descriptionDB"],$expense["fileDB"],$owner));
 		}
 		return $expenses;
-		
 	}
 	/**
 	* Loads a Expense from the database given its id

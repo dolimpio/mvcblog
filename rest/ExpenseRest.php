@@ -80,6 +80,116 @@ class ExpenseRest extends BaseRest {
 		echo(json_encode($expenses_array));
 	}
 
+	public function getPieChart($date) {
+		$currentUser = parent::authenticateUser();
+		$username = $currentUser->getUsername();
+		$filter_data = explode(',', $date);
+		$start_date = $filter_data[0];
+		$end_date = $filter_data[1];
+		$expenses = $this->expensesMapper->findByUsernameDate($username, $start_date, $end_date);
+		$pie_data_array = array();
+
+		$totalCombustible = 0;
+		$totalAlimentacion = 0;
+		$totalComunicaciones = 0;
+		$totalSuministros = 0;
+		$totalOcio = 0;
+
+		foreach($expenses as $expense) {
+			switch ($expense->getExpense_type()) {
+				case "combustible":
+					$totalCombustible += $expense->getExpense_quantity();
+					break;
+				case "alimentacion":
+					$totalAlimentacion += $expense->getExpense_quantity();
+					break;
+				case "comunicaciones":
+					$totalComunicaciones += $expense->getExpense_quantity();
+					break;
+				case "suministros":
+					$totalSuministros += $expense->getExpense_quantity();
+					break;
+				case "ocio":
+					$totalOcio += $expense->getExpense_quantity();
+					break;
+			}
+
+		}
+
+		array_push($pie_data_array, array(
+			"Combustible" => $totalCombustible,
+			"Alimentacion" => $totalAlimentacion,
+			"Comunicaciones" => $totalComunicaciones,
+			"Suministros" => $totalSuministros,
+			"Ocio" => $totalOcio
+		));
+		
+		header($_SERVER['SERVER_PROTOCOL'].' 200 Ok');
+		header('Content-Type: application/json');
+		echo(json_encode($pie_data_array));
+	}
+
+	public function getLineChart($date) {
+		$currentUser = parent::authenticateUser();
+		$username = $currentUser->getUsername();
+		$filter_data = explode(',', $date);
+		$start_date = $filter_data[0];
+		$end_date = $filter_data[1];
+		$expenses = $this->expensesMapper->findByUsernameDate($username, $start_date, $end_date);
+
+		$pie_data_array = array();
+
+		$monthly_totals = array();
+		foreach ($expenses as $expense) {
+			$month = date('F', strtotime($expense->getExpense_date()));
+			$expense_type = $expense->getExpense_type();
+			if (!isset($monthly_totals[$month])) {
+				$monthly_totals[$month] = array();
+			}
+			if (!isset($monthly_totals[$month][$expense_type])) {
+				$monthly_totals[$month][$expense_type] = 0;
+			}
+			$monthly_totals[$month][$expense_type] += $expense->getExpense_quantity();
+		}
+		
+		// $totalCombustible = array();
+		// $totalAlimentacion = array();
+		// $totalComunicaciones = array();
+		// $totalSuministros = array();
+		// $totalOcio = array();
+
+		// foreach($expenses as $expense) {
+		// 	switch ($expense->getExpense_type()) {
+		// 		case "combustible":
+		// 			array_push($totalCombustible, $expense->getExpense_quantity());
+		// 			break;
+		// 		case "alimentacion":
+		// 			array_push($totalAlimentacion, $expense->getExpense_quantity());
+		// 			break;
+		// 		case "comunicaciones":
+		// 			array_push($totalComunicaciones, $expense->getExpense_quantity());
+		// 			break;
+		// 		case "suministros":
+		// 			array_push($totalSuministros, $expense->getExpense_quantity());
+		// 			break;
+		// 		case "ocio":
+		// 			array_push($totalOcio, $expense->getExpense_quantity());
+		// 			break;
+		// 	}
+		// }
+		// array_push($pie_data_array, array(
+		// 	"Combustible" => $totalCombustible,
+		// 	"Alimentacion" => $totalAlimentacion,
+		// 	"Comunicaciones" => $totalComunicaciones,
+		// 	"Suministros" => $totalSuministros,
+		// 	"Ocio" => $totalOcio
+		// ));
+		
+		header($_SERVER['SERVER_PROTOCOL'].' 200 Ok');
+		header('Content-Type: application/json');
+		echo(json_encode($monthly_totals));
+	}
+
 	public function createExpense($data) {
 		$currentUser = parent::authenticateUser();
 		$expense = new Expenses();
@@ -213,6 +323,8 @@ class ExpenseRest extends BaseRest {
 $expenseRest = new ExpenseRest();
 URIDispatcher::getInstance()
 ->map("GET",	"/expense", array($expenseRest,"getExpenses"))
+->map("GET",	"/expense/piechart/$1", array($expenseRest,"getPieChart"))
+->map("GET",	"/expense/linechart/$1", array($expenseRest,"getLineChart"))
 ->map("GET",	"/expense/$1", array($expenseRest,"readExpense"))
 ->map("POST", "/expense", array($expenseRest,"createExpense"))
 ->map("PUT",	"/expense/$1", array($expenseRest,"updateExpense"))

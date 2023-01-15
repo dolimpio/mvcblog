@@ -1,5 +1,13 @@
 I18n.translations = {
+  'Fuel':'Combustible',
+  'Food':'Alimentacion',
+  'Communications':'Comunicaciones',
+  'Supplies':'Suministros',
+  'Fun':'Ocio',
   'Download in CSV' : 'Descargar en CSV',
+  'Apply date':'Aplicar fechas',
+  'From date':'Desde',
+  'To date':'Hasta',
   'Hello': 'Hola',
   'File':'Archivo',
   'Expenses':'Gastos',

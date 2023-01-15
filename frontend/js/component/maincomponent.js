@@ -37,7 +37,7 @@ class MainComponent extends Fronty.RouterComponent {
         title: 'Login'
       },
       charts: {
-        component: new CounterComponent(this.counterModel, this),
+        component: new CounterComponent(this.expensesModel,this.userModel, this),
         title: 'Charts'
       },
       defaultRoute: 'expenses'
@@ -63,6 +63,7 @@ class MainComponent extends Fronty.RouterComponent {
         }
         super.start(); // now we can call start
       });
+    
   }
 
   _createUserBarComponent() {

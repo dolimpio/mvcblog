@@ -41,6 +41,7 @@ class ExpensesComponent extends Fronty.ModelComponent {
   onStart() {
       this.updateExpenses();
   }
+
   expensesInCSV(){
     var expenses = this.expensesModel.expenses;
   
@@ -74,13 +75,7 @@ class ExpensesComponent extends Fronty.ModelComponent {
       ));
 
     });
-    this.sortExpenses();
   }
-
-  sortExpenses() {
-      console.log("esto es un expense" + this.expensesModel.expense);
-  }
-
   
   sortTableByDate(){
     let table = document.getElementById("expensesTable");
