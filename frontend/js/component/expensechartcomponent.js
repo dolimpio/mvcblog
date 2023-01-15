@@ -1,12 +1,11 @@
 class CounterComponent extends Fronty.ModelComponent {
-    constructor(counterModel, node) {
-      super(Handlebars.templates.counter, counterModel, node);
-      this.counterModel = counterModel;
-
-      this.addEventListener('click', '#increase', () => {
-        //update the model
-        this.counterModel.increase();
-      });
+    constructor(expensesModel, node) {
+      super(Handlebars.templates.counter, expensesModel, node);
+      this.expensesModel = expensesModel;
+      this.expenseService = new ExpensesService();
+      this.allExpenses = this.expenseService.findAllExpenses();
+      this.hola = Object.values(this.expenseService.findAllExpenses());
+      
 
       this.mesesIntervalo = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
       this.datos = [{
@@ -31,9 +30,11 @@ class CounterComponent extends Fronty.ModelComponent {
     }];
     }
 
-    
+
 
     onStart() {
+
+        console.log("a "+this.allExpenses);
       // create the Highcharts chart and keep it as an attribute for further updates
       Highcharts.chart('container', {
         title: {

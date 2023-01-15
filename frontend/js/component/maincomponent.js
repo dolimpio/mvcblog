@@ -37,7 +37,7 @@ class MainComponent extends Fronty.RouterComponent {
         title: 'Login'
       },
       charts: {
-        component: new CounterComponent(this.counterModel, this),
+        component: new CounterComponent(this.expensesModel, this),
         title: 'Charts'
       },
       defaultRoute: 'expenses'
@@ -57,6 +57,14 @@ class MainComponent extends Fronty.RouterComponent {
     // in sessionStorage, so we try to do a relogin and start the main component
     // only when login is checked
     this.userService.loginWithSessionData()
+      .then((logged) => {
+        if (logged != null) {
+          this.userModel.setLoggeduser(logged);
+        }
+        super.start(); // now we can call start
+      });
+      
+      this.userService.loginWithCookies()
       .then((logged) => {
         if (logged != null) {
           this.userModel.setLoggeduser(logged);

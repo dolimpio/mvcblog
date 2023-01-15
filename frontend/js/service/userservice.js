@@ -21,9 +21,63 @@ class UserService {
     });
   }
 
-  login(login, pass) {
-    return new Promise((resolve, reject) => {
+  setCookie(name, value, days) {
+    var expires = "";
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+}
 
+  getCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for(var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+    }
+  return null;
+}
+
+  checkCookie(name) {
+    var value = this.getCookie(name);
+    if (value != null) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+  deleteCookie(name) {
+    setCookie(name, "", -1);
+}
+
+  loginWithCookies() {
+    var self = this;
+    return new Promise((resolve, reject) => {
+      if (this.checkCookie('user') &&
+      this.checkCookie('pass')) {
+        console.log(this.getCookie("user")+ ", "+this.getCookie("pass"));
+        console.log("lo intento");
+        self.login(this.getCookie('login'), this.getCookie('pass'))
+          .then(() => {
+            resolve(this.getCookie('user'));
+          })
+          .catch(() => {
+            reject();
+          });
+      } else {
+        resolve(null);
+      }
+    });
+  }
+
+  login(login, pass) {
+    console.log("Entró en el login");
+    return new Promise((resolve, reject) => {
       $.get({
           url: AppConfig.backendServer+'/rest/user/' + login,
           beforeSend: function(xhr) {
@@ -32,8 +86,16 @@ class UserService {
         })
         .then(() => {
           //keep this authentication forever
+          console.log("Entró en el then del login");
           window.sessionStorage.setItem('login', login);
           window.sessionStorage.setItem('pass', pass);
+
+          if(this.getCookie("user")==null&&this.getCookie("pass")==null){
+            console.log("Entró en el if de las cookies");
+          this.setCookie("user",login,30);
+          this.setCookie("pass",pass,30);
+        }
+        console.log("Va a loguear");
           $.ajaxSetup({
             beforeSend: (xhr) => {
               xhr.setRequestHeader("Authorization", "Basic " + btoa(login + ":" + pass));
