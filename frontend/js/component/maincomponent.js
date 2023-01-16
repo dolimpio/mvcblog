@@ -88,6 +88,7 @@ class MainComponent extends Fronty.RouterComponent {
       var userToDelete = this.userModel.currentUser
       this.userModel.deleteuser();
       this.userService.deleteUser(userToDelete);
+      this.goToPage('login');
 
     });
 

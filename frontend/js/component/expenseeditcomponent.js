@@ -15,9 +15,11 @@ class ExpenseEditComponent extends Fronty.ModelComponent {
       this.expensesModel.selectedExpense.expense_date = $('#date').val();
       this.expensesModel.selectedExpense.expense_quantity = $('#quantity').val();
       console.log("este es el file en el edit-component "+ $('#file').val());
-      this.expensesModel.selectedExpense.expense_file = $('#file').val();
-      this.expensesModel.selectedExpense.expense_file = this.expensesModel.selectedExpense.expense_file.substring(this.expensesModel.selectedExpense.expense_file.lastIndexOf("\\") + 1);
-
+      let file = $('#file').val();
+      file = file.substring($('#file').val().lastIndexOf("\\") + 1);
+      console.log("EDITAR GASTO FICHERO NUEVO " + file);
+      this.expensesModel.selectedExpense.expense_file = file;
+      
       this.expensesModel.selectedExpense.expense_description = $('#description').val();
 
       this.expensesService.saveExpense(this.expensesModel.selectedExpense)
@@ -25,7 +27,7 @@ class ExpenseEditComponent extends Fronty.ModelComponent {
           this.expensesModel.set((model) => {
             model.errors = []
           });
-          this.router.goToPage('expenses');
+          this.router.goToPage('charts');
         })
         .fail((xhr, errorThrown, statusText) => {
           if (xhr.status == 400) {

@@ -167,8 +167,8 @@ class ExpensesMapper {
 		* @return void
 		*/
 		public function update(Expenses $expense) {
-			$stmt = $this->db->prepare("UPDATE expenses set typeDB=?, dateDB=?, quantityDB=?, descriptionDB=? where id=?");
-			$stmt->execute(array($expense->getExpense_type(), $expense->getExpense_date(), $expense->getExpense_quantity(), $expense->getExpense_description(), $expense->getId()));
+			$stmt = $this->db->prepare("UPDATE expenses set typeDB=?, dateDB=?, quantityDB=?, descriptionDB=?, fileDB=? where id=?");
+			$stmt->execute(array($expense->getExpense_type(), $expense->getExpense_date(), $expense->getExpense_quantity(), $expense->getExpense_description(), $expense->getExpense_file(), $expense->getId()));
 		}
 		/**
 		* Deletes a expense into the database

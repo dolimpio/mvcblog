@@ -7,6 +7,10 @@ class UserEditComponent extends Fronty.ModelComponent {
 
     this.userService = new UserService();
 
+    this.addEventListener('click', '#cancelbutton', () => {
+      
+      this.router.goToPage('charts');
+    });
 
     this.addEventListener('click', '#savebutton', () => {
       
@@ -16,12 +20,14 @@ class UserEditComponent extends Fronty.ModelComponent {
         email: $('#editemailname').val()
       })
       .then(() => {
-        this.userService.logout();
-        alert(I18n.translate('User modified! Please login'));
         this.userModel.set((model) => {
           model.registerErrors = {};
           model.registerMode = false;
         });
+        this.userService.logout();
+        router.goToPage('login');
+        alert(I18n.translate('User modified! Please login'));
+
       })
       .fail((xhr, errorThrown, statusText) => {
         if (xhr.status == 400) {
@@ -35,10 +41,6 @@ class UserEditComponent extends Fronty.ModelComponent {
 
     });
 
-    this.addEventListener('click', '#cancelbutton', () => {
-      
-      this.router.goToPage('expenses');
-    });
   }
 
   onStart() {

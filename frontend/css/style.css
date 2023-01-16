@@ -33,7 +33,7 @@ body{
 #title {
   font-size: 20px;
 }
-  
+
 #options {
   display: flex;
   align-items: center;
@@ -180,7 +180,7 @@ tr:hover td {
   background-color: #f5f5f5; /* add a light gray background color to rows when hovered over */
 }
 
-#tableOptions{
+#tableOptions, #downloadCsv{
   margin: 15px;
 }
 #menuOptions{
