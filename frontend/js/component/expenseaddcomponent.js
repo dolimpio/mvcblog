@@ -16,6 +16,8 @@ class ExpenseAddComponent extends Fronty.ModelComponent {
       newExpense.expense_quantity = $('#quantity').val();
       newExpense.expense_description = $('#description').val();
       newExpense.expense_file = $('#file').val();
+      newExpense.expense_file = newExpense.expense_file.substring($('#file').val().lastIndexOf("\\") + 1);
+
       newExpense.expense_owner = this.userModel.currentUser;
 
       this.ExpensesService.addExpense(newExpense)

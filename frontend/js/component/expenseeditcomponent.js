@@ -16,6 +16,7 @@ class ExpenseEditComponent extends Fronty.ModelComponent {
       this.expensesModel.selectedExpense.expense_quantity = $('#quantity').val();
       console.log("este es el file en el edit-component "+ $('#file').val());
       this.expensesModel.selectedExpense.expense_file = $('#file').val();
+      this.expensesModel.selectedExpense.expense_file = this.expensesModel.selectedExpense.expense_file.substring(this.expensesModel.selectedExpense.expense_file.lastIndexOf("\\") + 1);
 
       this.expensesModel.selectedExpense.expense_description = $('#description').val();
 
