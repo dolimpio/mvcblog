@@ -71,6 +71,7 @@ class MainComponent extends Fronty.RouterComponent {
         }
         super.start(); // now we can call start
       });
+    
   }
 
   _createUserBarComponent() {

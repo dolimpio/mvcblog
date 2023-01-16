@@ -72,8 +72,8 @@ class UserService {
     });
   }
 
-  login(login, pass) {
-    return new Promise((resolve, reject) => {
+  loginCookies(login, pass){
+  return new Promise((resolve, reject) => {
       $.get({
           url: AppConfig.backendServer+'/rest/user/' + login,
           beforeSend: function(xhr) {
@@ -108,11 +108,45 @@ class UserService {
     });
   }
 
+  login(login, pass) {
+    console.log(this.getCookie("user") + ", " + this.getCookie("pass"));
+    return new Promise((resolve, reject) => {
+      $.get({
+          url: AppConfig.backendServer+'/rest/user/' + login,
+          beforeSend: function(xhr) {
+            xhr.setRequestHeader("Authorization", "Basic " + btoa(login + ":" + pass));
+          }
+        })
+        .then(() => {
+          //keep this authentication forever
+          window.sessionStorage.setItem('login', login);
+          window.sessionStorage.setItem('pass', pass);
+        
+          $.ajaxSetup({
+            beforeSend: (xhr) => {
+              xhr.setRequestHeader("Authorization", "Basic " + btoa(login + ":" + pass));
+            }
+          });
+          resolve();
+        })
+        .fail((error) => {
+          window.sessionStorage.removeItem('login');
+          window.sessionStorage.removeItem('pass');
+          $.ajaxSetup({
+            beforeSend: (xhr) => {}
+          });
+          reject(error);
+        });
+    });
+  }
+
   logout() {
     window.sessionStorage.removeItem('login');
     window.sessionStorage.removeItem('pass');
     this.deleteCookie("user");
     this.deleteCookie("pass");
+    console.log(this.getCookie("user") + ", " + this.getCookie("pass"));
+
     $.ajaxSetup({
       beforeSend: (xhr) => {}
     });
