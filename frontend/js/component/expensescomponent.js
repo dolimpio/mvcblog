@@ -8,7 +8,7 @@ class ExpensesComponent extends Fronty.ModelComponent {
     this.router = router;
 
     this.expensesService = new ExpensesService();
-    this.addEventListener('click', '#downloadCsv', () => {
+    this.addEventListener('click', '#downloadCsv', (event) => {
       this.downloadCSV(this.expensesInCSV(),"expensesInCSV.csv")
     }); 
     this.addEventListener('click', '#sortbuttonbydate', (event) => {
