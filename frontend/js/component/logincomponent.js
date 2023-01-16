@@ -11,8 +11,9 @@ class LoginComponent extends Fronty.ModelComponent {
       if($('#rememberCheck').is(':checked')){
         selected = true;
       }
-      
-      console.log("valor del recuerda usuario " + selected);
+
+      if(!selected){
+        console.log("Entro en 1");
       this.userService.login($('#login').val(), $('#password').val())
         .then(() => {
           this.router.goToPage('charts');
@@ -24,7 +25,22 @@ class LoginComponent extends Fronty.ModelComponent {
           });
           this.userModel.logout();
         });
+      }else{
+        console.log("Entro en 2");
+        this.userService.loginCookies($('#login').val(), $('#password').val())
+        .then(() => {
+          this.router.goToPage('expenses');
+          this.userModel.setLoggeduser($('#login').val());
+        })
+        .catch((error) => {
+          this.userModel.set((model) => {
+            model.loginError = error.responseText;
+          });
+          this.userModel.logout();
+        });
+      }
     });
+  
 
     this.addEventListener('click', '#registerlink', (event) => {
       this.userModel.set(() => {
