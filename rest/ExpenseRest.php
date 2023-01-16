@@ -152,38 +152,6 @@ class ExpenseRest extends BaseRest {
 			$monthly_totals[$month][$expense_type] += $expense->getExpense_quantity();
 		}
 		
-		// $totalCombustible = array();
-		// $totalAlimentacion = array();
-		// $totalComunicaciones = array();
-		// $totalSuministros = array();
-		// $totalOcio = array();
-
-		// foreach($expenses as $expense) {
-		// 	switch ($expense->getExpense_type()) {
-		// 		case "combustible":
-		// 			array_push($totalCombustible, $expense->getExpense_quantity());
-		// 			break;
-		// 		case "alimentacion":
-		// 			array_push($totalAlimentacion, $expense->getExpense_quantity());
-		// 			break;
-		// 		case "comunicaciones":
-		// 			array_push($totalComunicaciones, $expense->getExpense_quantity());
-		// 			break;
-		// 		case "suministros":
-		// 			array_push($totalSuministros, $expense->getExpense_quantity());
-		// 			break;
-		// 		case "ocio":
-		// 			array_push($totalOcio, $expense->getExpense_quantity());
-		// 			break;
-		// 	}
-		// }
-		// array_push($pie_data_array, array(
-		// 	"Combustible" => $totalCombustible,
-		// 	"Alimentacion" => $totalAlimentacion,
-		// 	"Comunicaciones" => $totalComunicaciones,
-		// 	"Suministros" => $totalSuministros,
-		// 	"Ocio" => $totalOcio
-		// ));
 		
 		header($_SERVER['SERVER_PROTOCOL'].' 200 Ok');
 		header('Content-Type: application/json');

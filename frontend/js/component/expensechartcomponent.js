@@ -8,13 +8,12 @@ class CounterComponent extends Fronty.ModelComponent {
         let expense_date_to = 0;
         let dates = [];
         this.purePieData = null;
-        // this.mesesIntervalo = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
-        this.mesesIntervalo = [];
+        this.lineData;
+        this.pieData;
+        this.mesesIntervalo = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        // this.mesesIntervalo = [];
 
-        this.datos = [{
-            name: 'Comunicaciones',
-            data: [100, 200, 300, 150, 235, 254, 345, 293, 392, 124, 102, 134]
-        },
+        this.datos = [{ name: 'Comunicaciones', data: [100, 200, 300, 150, 235, 254, 345, 293, 392, 124, 102, 134] },
         {
             name: 'Ocio',
             data: [50, 30, 20, 15, 23, 25, 34, 29, 39, 12, 10, 13]
@@ -33,11 +32,13 @@ class CounterComponent extends Fronty.ModelComponent {
         }];
 
         this.addEventListener('click', '#datebutton', () => {
-            
             this.expense_date_from = $('#fromDate').val();
             this.expense_date_to = $('#toDate').val();
+            // let firstmonth = new Date(this.expense_date_from);
+            // let lastmonth = new Date(this.expense_date_to);
             this.mesesIntervalo = this.diffDates(this.expense_date_from, this.expense_date_to);
-            console.log("PUES HAY ESTOS MESES ENTRE MEDIO" + this.mesesIntervalo);
+            this.dates = [];
+            console.log("PUES HAY ESTOS MESES ENTRE MEDIO " + this.mesesIntervalo);
             console.log("fecha despues de puldar el boton " + this.expense_date_from);
             this.dates.push(this.expense_date_from);
             this.dates.push(this.expense_date_to);
@@ -45,73 +46,176 @@ class CounterComponent extends Fronty.ModelComponent {
             this.getPieChart(this.dates);
         });
 
-    }
+        this.addEventListener('click', '#buttontypes', () => {
+            console.log("SE PULSA Y SE MANTIENE VARIABLE LINE" + this.lineData);
+            console.log("SE PULSA Y SE MANTIENE VARIABLE PIE " + this.pieData);
+            let pie = this.pieData;
+            let line = this.lineData;
+            let resultFilterPie = [];
+            let resultFilterLine = [];
+            let combustibleCheck = $('#combustibleCheck').is(':checked');
+            let comunicacionesCheck = $('#comunicacionesCheck').is(':checked');
+            let alimentacionCheck = $('#alimentacionCheck').is(':checked');
+            let suministrosCheck = $('#suministrosCheck').is(':checked');
+            let ocioCheck = $('#ocioCheck').is(':checked');
+            console.log("QUE ME VIEN EN PIE " + JSON.stringify(pie));
 
-    //[{name: 'Comunicaciones', y: 2629}, { name: 'Ocio',y: 300}, {name: 'Alimentación',y: 1633}, {name: 'Combustible',y: 872}, {name: 'Suministros',y: 705}]
-    //[{"Combustible":23977366,"Alimentacion":657009,"Comunicaciones":686945454562,"Suministros":424984994,"Ocio":666666666713}]
+            for (let lineD of line) {
+                console.log("BULCE TIPOS " + JSON.stringify(lineD));
 
-    getLineChart(dates) {
-        console.log("fechasguapa" + this.expense_date_from);
-        this.expensesService.getLineChart(dates).then((data) => {
-            this.lineData = JSON.stringify(data);
-            console.log('Prueba dentro del getlinechart');
-            let result = [];
-            // Object.entries(data[0]).forEach(([key, value]) => {
-            //     result.push({ name: key, data: value });
-            // });
-            console.log("RES LINECHART= " + result.toString());
-            console.log("RES LINECHART= " + this.lineData);
-            this.lineChart(result);
+                if (combustibleCheck && lineD["name"] == "Combustible") {
+                    console.log("se chequea combustible?? EN EL DE LINEAAAA");
+                    resultFilterLine.push({ name: "Combustible", data: lineD.data });
+                    console.log("SE HA GUARDADO?= " + JSON.stringify(resultFilterLine));
+                } else if (comunicacionesCheck && lineD["name"] == "Comunicaciones") {
+                    resultFilterLine.push({ name: "Comunicaciones", data: lineD.data  });
+                } else if (alimentacionCheck && lineD["name"] == "Alimentacion") {
+                    resultFilterLine.push({ name: "Alimentacion", data: lineD.data  });
+                } else if (suministrosCheck && lineD["name"] == "Suministros") {
+                    resultFilterLine.push({ name: "Suministros", data: lineD.data  });
+                } else if (ocioCheck && lineD["name"] == "Ocio") {
+                    resultFilterLine.push({ name: "Ocio", data: lineD.data  });
+                }
+            }
+
+            for (let pieD of pie) {
+                console.log("-------- BULCE TIPOS en el pIE " + JSON.stringify(pieD));
+                if (combustibleCheck && pieD["name"] == "Combustible") {
+                    console.log("se chequea combustible??");
+                    resultFilterPie.push({ name: "Combustible", y: pieD.y });
+                    console.log("SE HA GUARDADO?= " + JSON.stringify(resultFilterPie));
+                } else if (comunicacionesCheck && pieD["name"] == "Comunicaciones") {
+                    resultFilterPie.push({ name: "Comunicaciones", y: pieD.y });
+                } else if (alimentacionCheck && pieD["name"] == "Alimentacion") {
+                    resultFilterPie.push({ name: "Alimentacion", y: pieD.y });
+                } else if (suministrosCheck && pieD["name"] == "Suministros") {
+                    resultFilterPie.push({ name: "Suministros", y: pieD.y });
+                } else if (ocioCheck && pieD["name"] == "Ocio") {
+                    resultFilterPie.push({ name: "Ocio", y: pieD.y });
+                }
+            }
+            console.log("RES LINE CHART FILTER= " + JSON.stringify(resultFilterLine));
+            console.log("RES PIE CHART FILTER= " + JSON.stringify(resultFilterPie));
+
+            this.lineChart(resultFilterLine);
+            this.pieChart(resultFilterPie);
+
 
         });
 
+    }
+
+    getLineChart(dates) {
+        console.log("fechasguapa" + this.expense_date_from);
+        let comun;
+        this.expensesService.getLineChart(dates).then((data) => {
+            console.log('Prueba dentro del getlinechart');
+            let result = data;
+            console.log("RES LINECHART= " + result.toString());
+            console.log("RES LINECHART= " + this.lineData);
+            console.log("CLAVES SON " + result);
+            let finalLineData = this.prepareLineChartData(result);
+            this.lineData = finalLineData;
+            console.log("VMAOS A REVISAR COMO ES EL RESULTADO DE LINE " + JSON.stringify(finalLineData));
+            this.lineChart(finalLineData);
+            comun = this.finalLineData;
+        });
 
     }
 
+    prepareLineChartData(result){
+        let dataCombustible = [];
+        let dataAlimentacion = [];
+        let dataOcio = [];
+        let dataComunicaciones = [];
+        let dataSuministros = [];
+        for (let index = 0; index < this.mesesIntervalo.length; index++) {
+            if (result.hasOwnProperty(this.mesesIntervalo[index])) {
+                let expenses_on_month = result[this.mesesIntervalo[index].toString()];
+                console.log("entrada dentro del mesAAAAAAAAAAA" + expenses_on_month)
+                Object.entries(expenses_on_month).forEach(month => {
+                    const str = month.toString();
+                    const [name, data] = str.split(",");
+                    const insideMonth = { [name]: parseInt(data) };
+
+                    console.log("ESTO ES UN MES " + insideMonth);
+                    console.log("ESTO ES UN MES EN STRING" + insideMonth.toString());
+
+                    if ("combustible" in insideMonth) {
+                        dataCombustible.push(insideMonth["combustible"]);
+                        console.log("Esto es un gasto de combusitbleee" + insideMonth["combustible"]);
+                    }
+
+                    if ("alimentacion" in insideMonth) {
+                        dataAlimentacion.push(insideMonth["alimentacion"]);
+                        console.log("Esto es un gasto de Alimentacion" + insideMonth["alimentacion"]);
+                    }
+
+                    if ("ocio" in insideMonth) {
+                        dataOcio.push(insideMonth["ocio"]);
+                        console.log("Esto es un gasto de Ocio" + insideMonth["ocio"]);
+                    }
+
+                    if ("comunicaciones" in insideMonth) {
+                        dataComunicaciones.push(insideMonth["comunicaciones"]);
+                        console.log("Esto es un gasto de Comunicaciones" + insideMonth["comunicaciones"]);
+                    } 
+
+                    if ("suministros" in insideMonth) {
+                        dataSuministros.push(insideMonth["suministros"]);
+                        console.log("Esto es un gasto de Suministros" + insideMonth["suministros"]);
+                    }
+                });
+            } else {
+                console.log("EL MES NO ESTA");
+
+                dataCombustible.push(0);
+                dataAlimentacion.push(0);
+                dataOcio.push(0);
+                dataComunicaciones.push(0);
+                dataSuministros.push(0);
+            }
+        }
+        const finalResult = [
+            {
+                name: 'Comunicaciones',
+                data: dataComunicaciones
+            },
+            {
+                name: 'Ocio',
+                data: dataOcio
+            },
+            {
+                name: 'Alimentacion',
+                data: dataAlimentacion
+            },
+            {
+                name: 'Combustible',
+                data: dataCombustible
+            },
+            {
+                name: 'Suministros',
+                data: dataSuministros
+            }
+        ];
+
+        console.log("RESULTADO FINAL A VER SI CUELA " + finalResult);
+        return finalResult;
+    }
     getPieChart(dates) {
         let comun = null;
         //ARREGLAR ESTA PARTE PARA PASARLO AL CHARTS
         this.expensesService.getPieChart(dates).then((data) => {
-            this.purePieData = data;
-            this.pieData = JSON.stringify(data);
             console.log('Prueba dentro del getpiechart');
             let result = [];
             Object.entries(data[0]).forEach(([key, value]) => {
                 result.push({ name: key, y: value });
             });
-            console.log("RES PUREPIEDATA CHART= " + this.purePieData);
-            console.log("RES PIE CHART= " + this.pieData);
             this.pieChart(result);
-            comun = result;
+            this.pieData = result;
+            console.log("RES PIE CHART= " + this.pieData);
 
         });
-
-        this.addEventListener('click', '#buttontypes', () => {
-            console.log("SE PULSA Y SE MANTIENE VARIABLE " + JSON.stringify(comun));
-            let resultFilter = [];
-            for (let type of comun) {
-                console.log("probandooo" + Object.entries(type)[0][0])
-                if ($('#combustibleCheck').is(':checked') && type["name"] == "Combustible") {
-                    console.log("se chequea combustible??");
-                    resultFilter.push({ name: "Combustible", y: type.y });
-                    console.log("SE HA GUARDADO?= " + JSON.stringify(resultFilter));
-                } else if ($('#comunicacionesCheck').is(':checked') && type["name"] == "Comunicaciones") {
-                    resultFilter.push({ name: "Comunicaciones", y: type.y });
-                } else if ($('#alimentacionCheck').is(':checked') && type["name"] == "Alimentacion") {
-                    resultFilter.push({ name: "Alimentacion", y: type.y });
-                } else if ($('#suministrosCheck').is(':checked') && type["name"] == "Suministros") {
-                    resultFilter.push({ name: "Suministros", y: type.y });
-                } else if ($('#ocioCheck').is(':checked') && type["name"] == "Ocio") {
-                    resultFilter.push({ name: "Ocio", y: type.y });
-                }
-            }
-
-            console.log("RES PIE CHART FILTER= " + JSON.stringify(resultFilter));
-            this.pieChart(resultFilter);
-
-        });
-
-
 
     }
 
@@ -165,9 +269,6 @@ class CounterComponent extends Fronty.ModelComponent {
             }]
         });
     }
-
-    // res: [{"Combustible":23977366,"Alimentacion":657009,"Comunicaciones":686945454562,"Suministros":424984994,"Ocio":666666666713}]
-
 
     lineChart(lineData) {
         Highcharts.chart('container', {
@@ -224,17 +325,18 @@ class CounterComponent extends Fronty.ModelComponent {
     }
 
     diffDates(from, to) {
+        var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
         var result = [];
-        var datFrom = new Date('1 ' + from);
-        var datTo = new Date('1 ' + to);
-        if(datFrom < datTo) {
-          var month = datFrom.getMonth();
-          var toMonth = datTo.getMonth() + 1 + ((datTo.getYear() - datFrom.getYear())*12); //toMonth adjusted for year
-          for(; month < toMonth; month++) { //Slice around the corner...
-            result.push(monthNames[month % 12]);
-          }
+        var datFrom = new Date(from);
+        var datTo = new Date(to);
+        if (datFrom < datTo) {
+            var month = datFrom.getMonth();
+            var toMonth = datTo.getMonth() + 1 + ((datTo.getYear() - datFrom.getYear()) * 12); //toMonth adjusted for year
+            for (; month < toMonth; month++) { //Slice around the corner...
+                result.push(monthNames[month % 12]);
+            }
         }
-    
+
         return result;
     }
     onStart() {
@@ -254,10 +356,6 @@ class CounterComponent extends Fronty.ModelComponent {
 
         this.getPieChart(this.dates);
         this.getLineChart(this.dates);
-        // this.getExpenses();
-        // create the Highcharts chart and keep it as an attribute for further updates
-
-
 
     }
 
