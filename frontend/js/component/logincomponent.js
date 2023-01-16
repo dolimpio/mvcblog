@@ -26,13 +26,13 @@ class LoginComponent extends Fronty.ModelComponent {
         });
     });
 
-    this.addEventListener('click', '#registerlink', () => {
+    this.addEventListener('click', '#registerlink', (event) => {
       this.userModel.set(() => {
         this.userModel.registerMode = true;
       });
     });
 
-    this.addEventListener('click', '#registerbutton', () => {
+    this.addEventListener('click', '#registerbutton', (event) => {
       this.userService.register({
           username: $('#registerusername').val(),
           password: $('#registerpassword').val(),

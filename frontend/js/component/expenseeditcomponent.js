@@ -10,7 +10,7 @@ class ExpenseEditComponent extends Fronty.ModelComponent {
 
     console.log("prueba con selected expense " +this.expensesModel.selectedExpense);
 
-    this.addEventListener('click', '#savebutton', () => {
+    this.addEventListener('click', '#savebutton', (event) => {
       this.expensesModel.selectedExpense.expense_type = $('#type').val();
       this.expensesModel.selectedExpense.expense_date = $('#date').val();
       this.expensesModel.selectedExpense.expense_quantity = $('#quantity').val();
@@ -38,7 +38,7 @@ class ExpenseEditComponent extends Fronty.ModelComponent {
 
     });
 
-    this.addEventListener('click', '#cancelbutton', () => {
+    this.addEventListener('click', '#cancelbutton', (event) => {
       
       this.router.goToPage('expenses');
     });

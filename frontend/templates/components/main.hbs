@@ -1,15 +1,18 @@
 <div>
 
 <header>
-  <h1>Blog</h1>
+  
+
 
   <nav id="menu">
-    <ul>
-      {{#if user.isLogged}}
+    <h1 id="Tittle">Blog</h1>
+    {{#if isLogged}}
+    <h1>{{user.currentUser}}asdasd</h1>
+    {{/if}}
+    <ul id="options">
       <li><a href="#charts">{{i18n 'Charts'}}</a></li>
 
-      <li><a href="#expenses">{{i18n 'Expenses'}}</a></li>
-      {{/if}}
+      <li><a id="menuOptions" href="#expenses">{{i18n 'Expenses'}}</a></li>
       <li>
         <div id="userbar">Loading...</div>
       </li>

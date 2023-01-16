@@ -297,4 +297,3 @@ URIDispatcher::getInstance()
 ->map("POST", "/expense", array($expenseRest,"createExpense"))
 ->map("PUT",	"/expense/$1", array($expenseRest,"updateExpense"))
 ->map("DELETE", "/expense/$1", array($expenseRest,"deleteExpense"));
-
