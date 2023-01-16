@@ -26,7 +26,7 @@ class BaseRest {
 	* @return User the user just authenticated.
 	*/
 	public function authenticateUser() {
-		if (!isset($_SERVER['PHP_AUTH_USER'])) {
+		if (!isset($_SERVER['PHP_AUTH_USER'])&&!isset($_COOKIE["user"])) {
 			header($_SERVER['SERVER_PROTOCOL'].' 401 Unauthorized');
 			header('WWW-Authenticate: Basic realm="Rest API of MVCBLOG"');
 			die('This operation requires authentication');

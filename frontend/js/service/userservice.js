@@ -21,9 +21,59 @@ class UserService {
     });
   }
 
+  setCookie(name, value, days) {
+    var expires = "";
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+}
+
+  getCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for(var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+    }
+  return null;
+}
+
+  checkCookie(name) {
+    var value = this.getCookie(name);
+    if (value != null) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+  deleteCookie(name) {
+    this.setCookie(name, "", -1);
+}
+
+  loginWithCookies() {
+    var self = this;
+    return new Promise((resolve, reject) => {
+      if (this.checkCookie('user') && this.checkCookie('pass')) {
+        self.login(this.getCookie("user"), this.getCookie("pass"))
+          .then(() => {
+            resolve(this.getCookie("user"));
+          })
+          .catch(() => {
+            reject();
+          });
+      } else {
+        resolve(null);
+      }
+    });
+  }
+
   login(login, pass) {
     return new Promise((resolve, reject) => {
-
       $.get({
           url: AppConfig.backendServer+'/rest/user/' + login,
           beforeSend: function(xhr) {
@@ -34,6 +84,12 @@ class UserService {
           //keep this authentication forever
           window.sessionStorage.setItem('login', login);
           window.sessionStorage.setItem('pass', pass);
+
+          if(this.getCookie("user")==null&&this.getCookie("pass")==null){
+          this.setCookie("user",login,30);
+          this.setCookie("pass",pass,30);
+        }
+        
           $.ajaxSetup({
             beforeSend: (xhr) => {
               xhr.setRequestHeader("Authorization", "Basic " + btoa(login + ":" + pass));
@@ -55,6 +111,8 @@ class UserService {
   logout() {
     window.sessionStorage.removeItem('login');
     window.sessionStorage.removeItem('pass');
+    this.deleteCookie("user");
+    this.deleteCookie("pass");
     $.ajaxSetup({
       beforeSend: (xhr) => {}
     });
@@ -79,7 +137,6 @@ class UserService {
   }
 
   deleteUser(user) {
-    console.log("dentro del service " + user)
     alert("User deleted successfully");
     return $.ajax({
       url: AppConfig.backendServer+'/rest/user/' + user,

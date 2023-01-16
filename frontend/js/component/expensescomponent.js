@@ -131,30 +131,30 @@ sortTableByType(){
   }
 }
 
-sortTableByQuantity(){
+sortTableByQuantity() {
   let table = document.getElementById("expensesTable");
   let rows = table.rows;
   let rowArray = [];
   for (let i = 1; i < rows.length; i++) {
-      rowArray.push(rows[i]);
+    rowArray.push(rows[i]);
   }
   if(this.flancotype){
     rowArray.sort(function(a, b) {
-      let dateA = new Date(a.cells[2].innerHTML);
-      let dateB = new Date(b.cells[2].innerHTML);
-      return dateA - dateB;
+      let numA = parseFloat(a.cells[2].innerHTML);
+      let numB = parseFloat(b.cells[2].innerHTML);
+      return numA - numB;
     });
     this.flancotype=!this.flancotype;
   }else{
     rowArray.sort(function(a, b) {
-      let dateA = new Date(a.cells[2].innerHTML);
-      let dateB = new Date(b.cells[2].innerHTML);
-      return dateB - dateA;
+      let numA = parseFloat(a.cells[2].innerHTML);
+      let numB = parseFloat(b.cells[2].innerHTML);
+      return numB - numA;
     })
     this.flancotype=!this.flancotype;
   }
   for (let i = 0; i < rowArray.length; i++) {
-      table.appendChild(rowArray[i]);
+    table.appendChild(rowArray[i]);
   }
 }
   

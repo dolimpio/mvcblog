@@ -63,7 +63,14 @@ class MainComponent extends Fronty.RouterComponent {
         }
         super.start(); // now we can call start
       });
-    
+      
+      this.userService.loginWithCookies()
+      .then((logged) => {
+        if (logged != null) {
+          this.userModel.setLoggeduser(logged);
+        }
+        super.start(); // now we can call start
+      });
   }
 
   _createUserBarComponent() {

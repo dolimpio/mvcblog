@@ -30,6 +30,7 @@ class User {
 	*/
 	private $passwd;
 
+
 	/**
 	* The constructor
 	*
@@ -43,6 +44,7 @@ class User {
 		$this->email = $email;
 
 	}
+
 
 	/**
 	* Gets the username of this user
