@@ -1,4 +1,8 @@
 I18n.translations = {
+  'Quantity':'Cantidad',
+  'Description' : 'Descripcion',
+  'Date' : 'Fecha',
+  'Expense Type' : 'Tipo de Gasto',
   'Download in CSV' : 'Descargar en CSV',
   'Hello': 'Hola',
   'File':'Archivo',
