@@ -28,13 +28,23 @@ class ExpenseRest extends BaseRest {
 	}
 
 	public function readExpense($expenseId) {
-		// find the Expense object in the database
+		$currentUser = parent::authenticateUser();
 		$expense = $this->expensesMapper->findById($expenseId);
+
+		// find the Expense object in the database
 		if ($expense == NULL) {
 			header($_SERVER['SERVER_PROTOCOL'].' 400 Bad request');
 			echo("Expense with id ".$expenseId." not found");
 			return;
 		}
+
+		// Check if the Expense owner is the currentUser (in Session)
+		if ($expense->getOwner() != $currentUser) {
+				header($_SERVER['SERVER_PROTOCOL'].' 403 Forbidden');
+				echo("you are not the owner of this expense");
+				return;
+				}
+
 
 		$expense_array = array(
 			"id" => $expense->getId(),
@@ -275,14 +285,6 @@ class ExpenseRest extends BaseRest {
 		$this->expensesMapper->delete($expense);
 
 		header($_SERVER['SERVER_PROTOCOL'].' 204 No Content');
-	}
-
-	public function debug_to_console($data) {
-		$output = $data;
-		if (is_array($output))
-			$output = implode(',', $output);
-	
-		echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
 	}
 
 }

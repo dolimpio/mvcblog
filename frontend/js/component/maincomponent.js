@@ -40,7 +40,7 @@ class MainComponent extends Fronty.RouterComponent {
         component: new CounterComponent(this.expensesModel,this.userModel, this),
         title: 'Charts'
       },
-      defaultRoute: 'expenses'
+      defaultRoute: 'login'
     });
 
     Handlebars.registerHelper('currentPage', () => {
@@ -85,11 +85,17 @@ class MainComponent extends Fronty.RouterComponent {
     });
 
     userbar.addEventListener('click', '#deleteuserbutton', () => {
-      console.log("dentro del main "+ this.userModel.currentUser);
-      var userToDelete = this.userModel.currentUser
-      this.userModel.deleteuser();
-      this.userService.deleteUser(userToDelete);
-      this.goToPage('login');
+
+      if (confirm(I18n.translate('Are you sure you want to delete this user?'))) {
+        var userToDelete = this.userModel.currentUser
+
+        this.userService.deleteUser(userToDelete).then(() => {
+          this.userModel.deleteuser();
+          this.goToPage('login');
+        }).fail(() => {
+            alert('user cannot be deleted')
+          });
+      }
 
     });
 

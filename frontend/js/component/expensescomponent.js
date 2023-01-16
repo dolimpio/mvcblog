@@ -175,7 +175,7 @@ class ExpenseRowComponent extends Fronty.ModelComponent {
     this.router = router;
 
     this.addEventListener('click', '.remove-button', (event) => {
-      if (confirm(I18n.translate('Are you sure?'))) {
+      if (confirm(I18n.translate('Are you sure you want to delete this expense?'))) {
         var expenseId = event.target.getAttribute('item');
         this.expensesComponent.expensesService.deleteExpense(expenseId)
           .fail(() => {

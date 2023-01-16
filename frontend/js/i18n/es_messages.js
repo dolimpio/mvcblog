@@ -30,7 +30,7 @@ I18n.translations = {
   'Actions': 'Acciones',
   'English': 'Inglés',
   'Spanish': 'Español',
-  'by': 'por',
+  'Expense by': 'Gasto de',
   'Comments': 'Comentarios',
   'title is mandatory': 'el título es obligatorio',
   'content is mandatory': 'el contenido es obligatorio',
@@ -48,6 +48,9 @@ I18n.translations = {
   'Register Here!': '¡Regístrate aquí!',
   'Create user': 'Registrarse',
   'Username must be at least 5 characters length': 'El usuario debe contener al menos 5 letras',
+  'Are you sure you want to delete this user?':'Estas seguro que quieres eliminar el usuario?',
+  'Are you sure you want to delete this expense?':'Estas seguro que quieres eliminar el gasto?',
+
   'Are you sure?': '¿Estás seguro?',
   'Remove': 'Eliminar',
   'Edit': 'Editar',

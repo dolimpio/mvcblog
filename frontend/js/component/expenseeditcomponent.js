@@ -48,6 +48,7 @@ class ExpenseEditComponent extends Fronty.ModelComponent {
   }
 
   onStart() {
+    
     var selectedId = this.router.getRouteQueryParam('id');
     console.log("me llega un expense nulo? " + selectedId);
     if (selectedId != null) {

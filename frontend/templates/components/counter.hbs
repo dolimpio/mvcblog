@@ -10,11 +10,12 @@
 
     </div>
 
-    <div>
-        <label for="combustibleCheck"></label>
+
+    <span>
+        <label for="combustibleCheck" class="checkbox-inline"></label>
         <input type="checkbox" id="combustibleCheck" value="yes">{{i18n 'Fuel'}}<br>
 
-        <label for="alimentacionCheck"></label>
+        <label for="alimentacionCheck" class="checkbox-inline"></label>
         <input type="checkbox" id="alimentacionCheck" value="yes">{{i18n 'Food'}}<br>
 
         <label for="comunicacionesCheck"></label>
@@ -25,12 +26,10 @@
 
         <label for="ocioCheck"></label>
         <input type="checkbox" id="ocioCheck" value="yes">{{i18n 'Fun'}}<br>
-        
+
         <input type="submit" id='buttontypes' value="{{i18n 'Filter by type of expenses'}}">
+    </span>
 
-    </div>
-
-    <span>Current counter: {{counter}}</span><button id="increase">Increase</button>
 
     <div id="container"></div>
 

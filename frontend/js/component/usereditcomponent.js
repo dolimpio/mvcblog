@@ -25,6 +25,8 @@ class UserEditComponent extends Fronty.ModelComponent {
           model.registerMode = false;
         });
         this.userService.logout();
+        this.userModel.logout();
+
         router.goToPage('login');
         alert(I18n.translate('User modified! Please login'));
 
