@@ -10,7 +10,7 @@ class ExpenseViewComponent extends Fronty.ModelComponent {
     this.expensesService = new ExpensesService();
 
     this.addEventListener('click', '#returnbutton', () => {
-      
+
       this.router.goToPage('expenses');
     });
   }

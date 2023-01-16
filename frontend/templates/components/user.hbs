@@ -1,12 +1,12 @@
 <div>
   {{#if isLogged}}
 
-    {{i18n 'Hello'}} {{currentUser}}
-    <button type="button" id='logoutbutton' ><span>{{i18n 'Logout'}}</span></button>
-    <button type="button" id='deleteuserbutton'><span>{{i18n 'Delete User'}}</span></button>
-    <button type="button" id='edituserbutton' ><span>{{i18n 'Edit User'}}</span></button>
+  {{i18n 'Hello'}} {{currentUser}}
+  <button type="button" id='logoutbutton'><span>{{i18n 'Logout'}}</span></button>
+  <button type="button" id='deleteuserbutton'><span>{{i18n 'Delete User'}}</span></button>
+  <button type="button" id='edituserbutton'><span>{{i18n 'Edit User'}}</span></button>
 
   {{else}}
-    <a href='#login'>{{i18n 'Login'}}</a>
+  <a href='#login'>{{i18n 'Login'}}</a>
   {{/if}}
 </div>

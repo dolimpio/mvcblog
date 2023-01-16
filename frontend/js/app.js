@@ -44,8 +44,8 @@ Promise.all([
       Handlebars.templates.expenserow = Handlebars.compile(source)),
     loadTextFile('templates/components/user-edit.hbs').then((source) =>
       Handlebars.templates.useredit = Handlebars.compile(source)),
-    loadTextFile('templates/components/counter.hbs').then((source) =>
-      Handlebars.templates.counter = Handlebars.compile(source))
+    loadTextFile('templates/components/analisys_panel.hbs').then((source) =>
+      Handlebars.templates.analisys_panel = Handlebars.compile(source))
   ])
   .then(() => {
     $(() => {

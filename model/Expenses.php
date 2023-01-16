@@ -217,7 +217,7 @@ class expenses {
 			//combustible, alimentacion, comunicaciones, suministros, ocio
 		if ($this->expense_type != "combustible" && $this->expense_type != "alimentacion" && $this->expense_type != "comunicaciones" &&
 		$this->expense_type != "suministros" && $this->expense_type != "ocio" && $this->expense_type != NULL) {
-			$errors["expense_type"] = "type must be combustible, alimentacion, comunicaciones, suministros or ocio";
+			$errors["expense_type"] = "type must be Fuel, Food, Communications, Supplies or Fun";
 		}
 		if ($this->expense_date == NULL ) {
 			$errors["expense_date"] = "date is mandatory";

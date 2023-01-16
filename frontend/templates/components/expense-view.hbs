@@ -1,22 +1,18 @@
 <div>
-  {{!-- MOdificar para que encaje con las expenses --}}
-  {{!-- Necesitamos ver los gastos de esta forma? como si fuera un post con comentarios??? --}}
+  <h2 class="td">{{i18n 'Expense by'}}:</h2>
+  <h4 class="td">{{selectedExpense.expense_owner}}</h4>
 
-    <h2 class="td">{{i18n 'Expense by'}}:</h2>
-    <h4 class="td">{{selectedExpense.expense_owner}}</h4>
- 
-    <h2 class="td">{{i18n 'Expense Type'}}:</h2>
-    <h4 class="td">{{selectedExpense.expense_type}}</h4>
+  <h2 class="td">{{i18n 'Expense Type'}}:</h2>
+  <h4 class="td">{{selectedExpense.expense_type}}</h4>
 
-    <h2>{{i18n 'Date'}}:</h2>
-    <h4>{{selectedExpense.expense_date}}</h4>
+  <h2>{{i18n 'Date'}}:</h2>
+  <h4>{{selectedExpense.expense_date}}</h4>
 
-    <h2>{{i18n 'Description'}}:</h2>
-    <h4>{{selectedExpense.expense_description}}</h4>
+  <h2>{{i18n 'Description'}}:</h2>
+  <h4>{{selectedExpense.expense_description}}</h4>
 
-    <h2>{{i18n 'Quantity'}}:</h2>
-    <h4>{{selectedExpense.expense_quantity}}</h4>
-
+  <h2>{{i18n 'Quantity'}}:</h2>
+  <h4>{{selectedExpense.expense_quantity}}</h4>
 
   <input type="button" id="returnbutton" value="{{i18n 'Return'}}"></input>
 

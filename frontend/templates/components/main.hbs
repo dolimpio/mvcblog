@@ -1,30 +1,26 @@
 <div>
 
-<header>
-  
+  <header>
+
+    <nav id="menu">
+      <h1 id="Tittle">Save Your Money</h1>
+
+      <ul id="options">
+        <li><a href="#charts">{{i18n 'Charts'}}</a></li>
+
+        <li><a id="menuOptions" href="#expenses">{{i18n 'Expenses'}}</a></li>
+        <li>
+          <div id="userbar">Loading...</div>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- router contents -->
+  <main id="maincontent">Loading...</main>
 
 
-  <nav id="menu">
-    <h1 id="Tittle">Blog</h1>
-    {{#if isLogged}}
-    <h1>{{user.currentUser}}asdasd</h1>
-    {{/if}}
-    <ul id="options">
-      <li><a href="#charts">{{i18n 'Charts'}}</a></li>
-
-      <li><a id="menuOptions" href="#expenses">{{i18n 'Expenses'}}</a></li>
-      <li>
-        <div id="userbar">Loading...</div>
-      </li>
-    </ul>
-  </nav>
-</header>
-
-<!-- router contents -->
-<main id="maincontent">Loading...</main>
-
-
-<footer>
-  <div id="languagecontrol">Loading...</div>
-</footer>
+  <footer>
+    <div id="languagecontrol">Loading...</div>
+  </footer>
 </div>

@@ -18,8 +18,6 @@ class UserModel extends Fronty.Model {
     });
   }
 
-
-  //COmprobar si hacer algo mas
   deleteuser() {
     this.set((self) => {
       delete self.currentUser;

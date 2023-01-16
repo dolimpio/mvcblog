@@ -1,45 +1,50 @@
-
 <div>
-  {{#if user.isLogged}} 
+  {{#if user.isLogged}}
   <h1>{{i18n 'Expenses'}}</h1>
-
-  <div id="expenses-table">
+  <div id="sortingButtons">
     <button type="button" id="sortbuttonbydate"><span>{{i18n 'Sort by date'}}</span></button>
     <button type="button" id="sortbuttonbytype"><span>{{i18n 'Sort by type'}}</span></button>
     <button type="button" id="sortbuttonbyquantity"><span>{{i18n 'Sort by quantity'}}</span></button>
+  </div>
+
+
+  <div id="expenses-table">
+
     {{#if expenses.length}}
-      <table id="expensesTable" border="1">
-        <thead>
+    <table id="expensesTable" border="1">
+      <thead>
         <tr>
           <th>{{i18n 'Type'}}</th>
           <th>{{i18n 'Date'}}</th>
           <th>{{i18n 'Quantity'}}</th>
           <th>{{i18n 'Description'}}</th>
           <th>{{i18n 'File'}}</th>
-        </tr>
-        </thead>
+          <th>{{i18n 'Actions'}}</th>
 
-        <tbody>
+        </tr>
+      </thead>
+
+      <tbody>
         {{#each expenses}}
 
-            {{#if_eq ../user.currentUser expense_owner}}
+        {{#if_eq ../user.currentUser expense_owner}}
 
-            <tr fronty-component="ExpenseRowComponent" key="{{id}}" model="expenses[{{@index}}]" id="item-{{id}}"></tr>
-          {{/if_eq}}
+        <tr fronty-component="ExpenseRowComponent" key="{{id}}" model="expenses[{{@index}}]" id="item-{{id}}"></tr>
+        {{/if_eq}}
 
         {{/each}}
 
       </tbody>
-      </table>
+    </table>
     {{/if}}
-    
+
   </div>
   <div id="optionsDiv">
     {{#if user.isLogged}}
-      <button id="tableOptions"><a href='#add-expense'>{{i18n 'Add expense'}}</a></button>
-      <button  type="button" id='downloadCsv' ><span>{{i18n 'Download in CSV'}}</span></button>
-      <a type="href" id='downloadLink'></a>
+    <button id="tableOptions"><a href='#add-expense'>{{i18n 'Add expense'}}</a></button>
+    <button type="button" id='downloadCsv'><span>{{i18n 'Download in CSV'}}</span></button>
+    <a type="href" id='downloadLink'></a>
     {{/if}}
-  </div>  
+  </div>
   {{/if}}
 </div>

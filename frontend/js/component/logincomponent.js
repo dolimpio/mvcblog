@@ -8,39 +8,37 @@ class LoginComponent extends Fronty.ModelComponent {
     this.addEventListener('click', '#loginbutton', (event) => {
 
       var selected = false;
-      if($('#rememberCheck').is(':checked')){
+      if ($('#rememberCheck').is(':checked')) {
         selected = true;
       }
 
-      if(!selected){
-        console.log("Entro en 1");
-      this.userService.login($('#login').val(), $('#password').val())
-        .then(() => {
-          this.router.goToPage('charts');
-          this.userModel.setLoggeduser($('#login').val());
-        })
-        .catch((error) => {
-          this.userModel.set((model) => {
-            model.loginError = error.responseText;
+      if (!selected) {
+        this.userService.login($('#login').val(), $('#password').val())
+          .then(() => {
+            this.router.goToPage('charts');
+            this.userModel.setLoggeduser($('#login').val());
+          })
+          .catch((error) => {
+            this.userModel.set((model) => {
+              model.loginError = error.responseText;
+            });
+            this.userModel.logout();
           });
-          this.userModel.logout();
-        });
-      }else{
-        console.log("Entro en 2");
+      } else {
         this.userService.loginCookies($('#login').val(), $('#password').val())
-        .then(() => {
-          this.router.goToPage('expenses');
-          this.userModel.setLoggeduser($('#login').val());
-        })
-        .catch((error) => {
-          this.userModel.set((model) => {
-            model.loginError = error.responseText;
+          .then(() => {
+            this.router.goToPage('expenses');
+            this.userModel.setLoggeduser($('#login').val());
+          })
+          .catch((error) => {
+            this.userModel.set((model) => {
+              model.loginError = error.responseText;
+            });
+            this.userModel.logout();
           });
-          this.userModel.logout();
-        });
       }
     });
-  
+
 
     this.addEventListener('click', '#registerlink', (event) => {
       this.userModel.set(() => {
@@ -50,11 +48,11 @@ class LoginComponent extends Fronty.ModelComponent {
 
     this.addEventListener('click', '#registerbutton', (event) => {
       this.userService.register({
-          username: $('#registerusername').val(),
-          password: $('#registerpassword').val(),
-          email: $('#registeremailname').val()
+        username: $('#registerusername').val(),
+        password: $('#registerpassword').val(),
+        email: $('#registeremailname').val()
 
-        })
+      })
         .then(() => {
           alert(I18n.translate('User registered! Please login'));
           this.userModel.set((model) => {

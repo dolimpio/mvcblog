@@ -200,3 +200,20 @@ tr:hover td {
   display: flex;
   flex-direction: row;
 }
+#checkTypes{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+#buttontypes{
+  margin-left: 10px;
+}
+#sortingButtons{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}

@@ -1,6 +1,6 @@
-class CounterComponent extends Fronty.ModelComponent {
+class ChartComponent extends Fronty.ModelComponent {
     constructor(expensesModel, userModel, node) {
-        super(Handlebars.templates.counter, expensesModel, node);
+        super(Handlebars.templates.analisys_panel, expensesModel, node);
         this.expensesService = new ExpensesService();
         this.expensesModel = expensesModel; // expenses
         this.userModel = userModel; // global
@@ -11,7 +11,6 @@ class CounterComponent extends Fronty.ModelComponent {
         this.lineData;
         this.pieData;
         this.mesesIntervalo = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-        // this.mesesIntervalo = [];
 
         this.datos = [{ name: 'Comunicaciones', data: [100, 200, 300, 150, 235, 254, 345, 293, 392, 124, 102, 134] },
         {
@@ -38,8 +37,6 @@ class CounterComponent extends Fronty.ModelComponent {
             // let lastmonth = new Date(this.expense_date_to);
             this.mesesIntervalo = this.diffDates(this.expense_date_from, this.expense_date_to);
             this.dates = [];
-            console.log("PUES HAY ESTOS MESES ENTRE MEDIO " + this.mesesIntervalo);
-            console.log("fecha despues de puldar el boton " + this.expense_date_from);
             this.dates.push(this.expense_date_from);
             this.dates.push(this.expense_date_to);
             this.getLineChart(this.dates);
@@ -47,8 +44,6 @@ class CounterComponent extends Fronty.ModelComponent {
         });
 
         this.addEventListener('click', '#buttontypes', () => {
-            console.log("SE PULSA Y SE MANTIENE VARIABLE LINE" + this.lineData);
-            console.log("SE PULSA Y SE MANTIENE VARIABLE PIE " + this.pieData);
             let pie = this.pieData;
             let line = this.lineData;
             let resultFilterPie = [];
@@ -58,32 +53,25 @@ class CounterComponent extends Fronty.ModelComponent {
             let alimentacionCheck = $('#alimentacionCheck').is(':checked');
             let suministrosCheck = $('#suministrosCheck').is(':checked');
             let ocioCheck = $('#ocioCheck').is(':checked');
-            console.log("QUE ME VIEN EN PIE " + JSON.stringify(pie));
 
             for (let lineD of line) {
-                console.log("BULCE TIPOS " + JSON.stringify(lineD));
 
                 if (combustibleCheck && lineD["name"] == "Combustible") {
-                    console.log("se chequea combustible?? EN EL DE LINEAAAA");
                     resultFilterLine.push({ name: "Combustible", data: lineD.data });
-                    console.log("SE HA GUARDADO?= " + JSON.stringify(resultFilterLine));
                 } else if (comunicacionesCheck && lineD["name"] == "Comunicaciones") {
-                    resultFilterLine.push({ name: "Comunicaciones", data: lineD.data  });
+                    resultFilterLine.push({ name: "Comunicaciones", data: lineD.data });
                 } else if (alimentacionCheck && lineD["name"] == "Alimentacion") {
-                    resultFilterLine.push({ name: "Alimentacion", data: lineD.data  });
+                    resultFilterLine.push({ name: "Alimentacion", data: lineD.data });
                 } else if (suministrosCheck && lineD["name"] == "Suministros") {
-                    resultFilterLine.push({ name: "Suministros", data: lineD.data  });
+                    resultFilterLine.push({ name: "Suministros", data: lineD.data });
                 } else if (ocioCheck && lineD["name"] == "Ocio") {
-                    resultFilterLine.push({ name: "Ocio", data: lineD.data  });
+                    resultFilterLine.push({ name: "Ocio", data: lineD.data });
                 }
             }
 
             for (let pieD of pie) {
-                console.log("-------- BULCE TIPOS en el pIE " + JSON.stringify(pieD));
                 if (combustibleCheck && pieD["name"] == "Combustible") {
-                    console.log("se chequea combustible??");
                     resultFilterPie.push({ name: "Combustible", y: pieD.y });
-                    console.log("SE HA GUARDADO?= " + JSON.stringify(resultFilterPie));
                 } else if (comunicacionesCheck && pieD["name"] == "Comunicaciones") {
                     resultFilterPie.push({ name: "Comunicaciones", y: pieD.y });
                 } else if (alimentacionCheck && pieD["name"] == "Alimentacion") {
@@ -94,8 +82,6 @@ class CounterComponent extends Fronty.ModelComponent {
                     resultFilterPie.push({ name: "Ocio", y: pieD.y });
                 }
             }
-            console.log("RES LINE CHART FILTER= " + JSON.stringify(resultFilterLine));
-            console.log("RES PIE CHART FILTER= " + JSON.stringify(resultFilterPie));
 
             this.lineChart(resultFilterLine);
             this.pieChart(resultFilterPie);
@@ -106,69 +92,69 @@ class CounterComponent extends Fronty.ModelComponent {
     }
 
     getLineChart(dates) {
-        console.log("fechasguapa" + this.expense_date_from);
         let comun;
         this.expensesService.getLineChart(dates).then((data) => {
-            console.log('Prueba dentro del getlinechart');
             let result = data;
-            console.log("RES LINECHART= " + result.toString());
-            console.log("RES LINECHART= " + this.lineData);
-            console.log("CLAVES SON " + result);
             let finalLineData = this.prepareLineChartData(result);
             this.lineData = finalLineData;
-            console.log("VMAOS A REVISAR COMO ES EL RESULTADO DE LINE " + JSON.stringify(finalLineData));
             this.lineChart(finalLineData);
             comun = this.finalLineData;
         });
 
     }
 
-    prepareLineChartData(result){
+    prepareLineChartData(result) {
         let dataCombustible = [];
         let dataAlimentacion = [];
         let dataOcio = [];
         let dataComunicaciones = [];
         let dataSuministros = [];
+
         for (let index = 0; index < this.mesesIntervalo.length; index++) {
+
             if (result.hasOwnProperty(this.mesesIntervalo[index])) {
                 let expenses_on_month = result[this.mesesIntervalo[index].toString()];
-                console.log("entrada dentro del mesAAAAAAAAAAA" + expenses_on_month)
+
+                if (!("combustible" in expenses_on_month)) {
+                    dataCombustible.push(0);
+                }
+                if (!("alimentacion" in expenses_on_month)) {
+                    dataAlimentacion.push(0);
+                }
+                if (!("ocio" in expenses_on_month)) {
+                    dataOcio.push(0);
+                }
+                if (!("comunicaciones" in expenses_on_month)) {
+                    dataComunicaciones.push(0);
+
+                }
+                if (!("suministros" in expenses_on_month)) {
+                    dataSuministros.push(0);
+                }
+
                 Object.entries(expenses_on_month).forEach(month => {
                     const str = month.toString();
                     const [name, data] = str.split(",");
                     const insideMonth = { [name]: parseInt(data) };
 
-                    console.log("ESTO ES UN MES " + insideMonth);
-                    console.log("ESTO ES UN MES EN STRING" + insideMonth.toString());
-
                     if ("combustible" in insideMonth) {
                         dataCombustible.push(insideMonth["combustible"]);
-                        console.log("Esto es un gasto de combusitbleee" + insideMonth["combustible"]);
                     }
-
                     if ("alimentacion" in insideMonth) {
                         dataAlimentacion.push(insideMonth["alimentacion"]);
-                        console.log("Esto es un gasto de Alimentacion" + insideMonth["alimentacion"]);
                     }
-
                     if ("ocio" in insideMonth) {
                         dataOcio.push(insideMonth["ocio"]);
-                        console.log("Esto es un gasto de Ocio" + insideMonth["ocio"]);
                     }
-
                     if ("comunicaciones" in insideMonth) {
                         dataComunicaciones.push(insideMonth["comunicaciones"]);
-                        console.log("Esto es un gasto de Comunicaciones" + insideMonth["comunicaciones"]);
-                    } 
-
+                    }
                     if ("suministros" in insideMonth) {
                         dataSuministros.push(insideMonth["suministros"]);
-                        console.log("Esto es un gasto de Suministros" + insideMonth["suministros"]);
                     }
                 });
-            } else {
-                console.log("EL MES NO ESTA");
 
+            } else {
                 dataCombustible.push(0);
                 dataAlimentacion.push(0);
                 dataOcio.push(0);
@@ -176,6 +162,7 @@ class CounterComponent extends Fronty.ModelComponent {
                 dataSuministros.push(0);
             }
         }
+
         const finalResult = [
             {
                 name: 'Comunicaciones',
@@ -199,22 +186,17 @@ class CounterComponent extends Fronty.ModelComponent {
             }
         ];
 
-        console.log("RESULTADO FINAL A VER SI CUELA " + finalResult);
         return finalResult;
     }
     getPieChart(dates) {
         let comun = null;
-        //ARREGLAR ESTA PARTE PARA PASARLO AL CHARTS
         this.expensesService.getPieChart(dates).then((data) => {
-            console.log('Prueba dentro del getpiechart');
             let result = [];
             Object.entries(data[0]).forEach(([key, value]) => {
                 result.push({ name: key, y: value });
             });
             this.pieChart(result);
             this.pieData = result;
-            console.log("RES PIE CHART= " + this.pieData);
-
         });
 
     }
@@ -247,7 +229,7 @@ class CounterComponent extends Fronty.ModelComponent {
             },
             plotOptions: {
                 pie: {
-                    size: '100%',
+                    size: '85%',
                     allowPointSelect: true,
                     cursor: 'pointer',
                     dataLabels: {
@@ -340,19 +322,16 @@ class CounterComponent extends Fronty.ModelComponent {
         return result;
     }
     onStart() {
-
         this.expense_date_from = new Date();
-        this.expense_date_from.setYear(1920);
+        this.expense_date_from.setYear(2021);
         this.expense_date_to = new Date();
+
         this.dates = [];
         this.expense_date_from = this.expense_date_from.toISOString().slice(0, 10);
         this.expense_date_to = this.expense_date_to.toISOString().slice(0, 10);
-        console.log("fechas probando url" + this.expense_date_from + " " + this.expense_date_to);
 
         this.dates.push(this.expense_date_from);
         this.dates.push(this.expense_date_to);
-
-        console.log("fechas probando url" + this.dates);
 
         this.getPieChart(this.dates);
         this.getLineChart(this.dates);

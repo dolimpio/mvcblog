@@ -9,7 +9,7 @@ class MainComponent extends Fronty.RouterComponent {
     this.expensesModel = new ExpensesModel();
     this.userService = new UserService();
     this.expensesService = new ExpensesService();
-    this.counterModel = new Counter();
+    this.chartsModel = new Charts();
 
     super.setRouterConfig({
       expenses: {
@@ -37,14 +37,14 @@ class MainComponent extends Fronty.RouterComponent {
         title: 'Login'
       },
       charts: {
-        component: new CounterComponent(this.expensesModel,this.userModel, this),
+        component: new ChartComponent(this.expensesModel, this.userModel, this),
         title: 'Charts'
       },
       defaultRoute: 'login'
     });
 
     Handlebars.registerHelper('currentPage', () => {
-          return super.getCurrentPage();
+      return super.getCurrentPage();
     });
 
     this.addChildComponent(this._createUserBarComponent());
@@ -63,15 +63,15 @@ class MainComponent extends Fronty.RouterComponent {
         }
         super.start(); // now we can call start
       });
-      
-      this.userService.loginWithCookies()
+
+    this.userService.loginWithCookies()
       .then((logged) => {
         if (logged != null) {
           this.userModel.setLoggeduser(logged);
         }
         super.start(); // now we can call start
       });
-    
+
   }
 
   _createUserBarComponent() {
@@ -81,7 +81,7 @@ class MainComponent extends Fronty.RouterComponent {
       this.userModel.logout();
       this.userService.logout();
       this.goToPage('login');
-      
+
     });
 
     userbar.addEventListener('click', '#deleteuserbutton', () => {
@@ -93,8 +93,8 @@ class MainComponent extends Fronty.RouterComponent {
           this.userModel.deleteuser();
           this.goToPage('login');
         }).fail(() => {
-            alert('user cannot be deleted')
-          });
+          alert('user cannot be deleted')
+        });
       }
 
     });
@@ -102,7 +102,7 @@ class MainComponent extends Fronty.RouterComponent {
     userbar.addEventListener('click', '#edituserbutton', () => {
       this.goToPage('edit-user');
     });
-    
+
     return userbar;
   }
 

@@ -1,17 +1,17 @@
 <div>
   <h2>{{i18n 'Edit user'}}</h2>
-    <div id="registration-form">
+  <div id="registration-form">
 
-      {{i18n 'Username'}}: <input type="text" id="editusername" value="{{userModel.username}}">
-      {{#i18n}}{{registerErrors.username}}{{/i18n}}<br> 
+    {{i18n 'Username'}}: <input type="text" id="editusername" value="{{userModel.username}}">
+    {{#i18n}}{{registerErrors.username}}{{/i18n}}<br>
 
-      {{i18n 'Email'}}: <input type="email" id="editemailname" value="{{user.email}}">
-      {{#i18n}}{{registerErrors.email}}{{/i18n}}<br> 
-      
-      {{i18n 'Password'}}: <input type="password" id="editpassword" value="{{user.passwd}}">
-      {{#i18n}}{{registerErrors.passwd}}{{/i18n}}<br>
+    {{i18n 'Email'}}: <input type="email" id="editemailname" value="{{user.email}}">
+    {{#i18n}}{{registerErrors.email}}{{/i18n}}<br>
 
-      <input type="submit" id='savebutton' value="{{i18n 'Edit user'}}">
-      <input type="submit" id='cancelbutton' value="{{i18n 'Cancel'}}">
-    </div>
+    {{i18n 'Password'}}: <input type="password" id="editpassword" value="{{user.passwd}}">
+    {{#i18n}}{{registerErrors.passwd}}{{/i18n}}<br>
+
+    <input type="submit" id='savebutton' value="{{i18n 'Edit user'}}">
+    <input type="submit" id='cancelbutton' value="{{i18n 'Cancel'}}">
+  </div>
 </div>

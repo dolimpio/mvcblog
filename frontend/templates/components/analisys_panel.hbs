@@ -1,0 +1,39 @@
+<div id="counter">
+    <div class="grid-item-date">
+        <label for="fromDate">{{i18n 'From date'}}:</label>
+        <input type="date" id="fromDate" name="fromDate">
+
+        <label for="toDate">{{i18n 'To date'}}:</label>
+        <input type="date" id="toDate" name="toDate">
+
+        <button class="botton" id="datebutton">{{i18n 'Apply date'}}</button>
+
+    </div>
+
+
+    <div id="checkTypes">
+        <label for="combustibleCheck" class="checkbox-inline"></label>
+        <input type="checkbox" id="combustibleCheck" value="yes">{{i18n 'Fuel'}}</input>
+
+        <label for="alimentacionCheck" class="checkbox-inline"></label>
+        <input type="checkbox" id="alimentacionCheck" value="yes">{{i18n 'Food'}}</input>
+
+        <label for="comunicacionesCheck"></label>
+        <input type="checkbox" id="comunicacionesCheck" value="yes">{{i18n 'Communications'}}</input>
+
+        <label for="suministrosCheck"></label>
+        <input type="checkbox" id="suministrosCheck" value="yes">{{i18n 'Supplies'}}</input>
+
+        <label for="ocioCheck"></label>
+        <input type="checkbox" id="ocioCheck" value="yes">{{i18n 'Fun'}}</input>
+
+        <button type="submit" id='buttontypes'><span>{{i18n 'Filter by type of expenses'}}</span></button>
+    </div>
+    <div id="graficas">
+
+
+        <div id="container"></div>
+
+        <div id="container2"></div>
+    </div>
+</div>

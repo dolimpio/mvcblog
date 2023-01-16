@@ -2,7 +2,7 @@ class ExpenseAddComponent extends Fronty.ModelComponent {
   constructor(expensesModel, userModel, router) {
     super(Handlebars.templates.expenseedit, expensesModel);
     this.expensesModel = expensesModel; // expenses
-    
+
     this.userModel = userModel; // global
     this.addModel('user', userModel);
     this.router = router;
@@ -36,21 +36,21 @@ class ExpenseAddComponent extends Fronty.ModelComponent {
     });
 
     this.addEventListener('click', '#cancelbutton', () => {
-      
+
       this.router.goToPage('expenses');
     });
   }
-  
+
   onStart() {
     var fecha = new Date(); //Fecha actual
-    var mes = fecha.getMonth()+1; //obteniendo mes
+    var mes = fecha.getMonth() + 1; //obteniendo mes
     var dia = fecha.getDate(); //obteniendo dia
     var ano = fecha.getFullYear(); //obteniendo año
-    if(dia<10)
-      dia='0'+dia; //agrega cero si el menor de 10
-    if(mes<10)
-      mes='0'+mes //agrega cero si el menor de 10
-      document.getElementById('date').value=ano+"-"+mes+"-"+dia;
+    if (dia < 10)
+      dia = '0' + dia; //agrega cero si el menor de 10
+    if (mes < 10)
+      mes = '0' + mes //agrega cero si el menor de 10
+    document.getElementById('date').value = ano + "-" + mes + "-" + dia;
     this.expensesModel.setSelectedExpense(new ExpenseModel());
   }
 

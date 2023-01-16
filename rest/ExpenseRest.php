@@ -210,7 +210,6 @@ class ExpenseRest extends BaseRest {
 				"expense_type" => $expense->getExpense_type(),
 				"expense_date" => $expense->getExpense_date(),
 				"expense_quantity" => $expense->getExpense_quantity(),
-				// por ahora queda asi, pero igual deberiamos comprobar que esta seteados??
 				"expense_description" => $expense->getExpense_description(),
 				"expense_file" => $expense->getExpense_file(),
 				"expense_owner" => $expense->getOwner()->getUsername()
